@@ -1,15 +1,18 @@
 using UnityEngine;
 
-public class Cell
+namespace _Scripts.Grid
 {
-    public Vector2Int Position { get; private set; }
-    public bool IsOccupied { get; private set; }
-    public bool IsWalkable { get; set; }
-
-    public Cell(Vector2Int position)
+    public class Cell
     {
-        Position = position;
-        IsOccupied = false;
-        IsWalkable = true;
+        public Vector2Int Position { get; private set; }
+        public bool IsOccupied { get; private set; }
+        public bool IsWalkable { get; set; }
+
+        public Cell(Vector2Int position)
+        {
+            Position = position;
+            IsOccupied = false;
+            IsWalkable = true;
+        }
     }
 }
