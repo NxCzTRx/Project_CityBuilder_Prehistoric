@@ -4,6 +4,12 @@ namespace _Scripts.Grid
 {
     public static class GridUtils
     {
+        /// <summary>
+        /// Returns the grid position corresponding to the given world position, based on the cell size.
+        /// </summary>
+        /// <param name="worldPosition"></param>
+        /// <param name="cellSize"></param>
+        /// <returns></returns>
         public static Vector2Int WorldToGridPosition(Vector3 worldPosition, float cellSize)
         {
             int x = Mathf.FloorToInt(worldPosition.x / cellSize);
@@ -11,11 +17,36 @@ namespace _Scripts.Grid
             return new Vector2Int(x, y);
         }
 
-        public static Vector3 GridToWorldPosition(Vector3 gridPosition, float cellSize)
+        /// <summary>
+        /// Returns a position in world space corresponding to the center of the cell at the given grid position.
+        /// </summary>
+        /// <param name="gridPosition"></param>
+        /// <param name="cellSize"></param>
+        /// <returns></returns>
+        public static Vector3 CellToWorldPosition(Vector2Int gridPosition, float cellSize)
         {
             float x = gridPosition.x * cellSize + cellSize / 2f;
             float y = gridPosition.y * cellSize + cellSize / 2f;
             return new Vector3(x, y, 0);
+        }
+
+        /// <summary>
+        /// Retruns a position in world space corresponding to the center of the area
+        /// defined by the given grid origin (bottom-left cell) and size.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="cellSize"></param>
+        /// <returns></returns>
+        public static Vector3 GridToWorldPosition(Vector2Int origin, Vector2Int size, float cellSize)
+        {
+            float width = size.x * cellSize;
+            float height = size.y * cellSize;
+            
+            return new Vector3(
+                origin.x * cellSize + width / 2f, 
+                origin.y * cellSize + height / 2f, 
+                0);
         }
     }
 }

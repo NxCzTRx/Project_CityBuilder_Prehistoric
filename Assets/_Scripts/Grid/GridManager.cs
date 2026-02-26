@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Scripts.Grid
@@ -7,6 +8,7 @@ namespace _Scripts.Grid
         [SerializeField] private int gridWidth = 20;
         [SerializeField] private int gridHeight = 20;
         [SerializeField] private float cellSize = 1f;
+        public float CellSize => cellSize;
     
         private Cell[,] _grid;
 
@@ -47,7 +49,10 @@ namespace _Scripts.Grid
             {
                 for (int y = 0; y < gridHeight; y++)
                 {
-                    Vector3 cellPosition = new Vector3(x * cellSize, y * cellSize, 0);
+                    Vector3 cellPosition = new Vector3(
+                        _grid[x, y].Position.x * cellSize + cellSize / 2f, 
+                        _grid[x, y].Position.y * cellSize + cellSize / 2f, 
+                        0f);
                     Gizmos.color = _grid[x, y].IsWalkable ? Color.green : Color.red;
                     Gizmos.DrawWireCube(cellPosition, Vector3.one * cellSize);
                 }

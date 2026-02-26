@@ -12,6 +12,9 @@ namespace _Scripts.Input
         private PlayerInput _playerInput;
     
         public event Action<Vector2> OnCameraMove;
+        
+        public event Action<Vector2> OnMouseMove;
+        
     
         private void Awake()
         {
@@ -30,7 +33,15 @@ namespace _Scripts.Input
         private void OnEnable()
         {
             _playerInput.actions["MoveCamera"].performed += MoveCameraPerformed;
-            _playerInput.actions["MoveCamera"].canceled += OMoveCameraCanceled;
+            _playerInput.actions["MoveCamera"].canceled += MoveCameraCanceled;
+            
+            _playerInput.actions["MouseMovement"].performed += MoveMousePerformed; //MANY CALLS
+        }
+
+        private void MoveMousePerformed(InputAction.CallbackContext ctx)
+        {
+            var mousePosition = ctx.ReadValue<Vector2>();
+            OnMouseMove?.Invoke(mousePosition);
         }
 
         private void MoveCameraPerformed(InputAction.CallbackContext ctx)
@@ -39,7 +50,7 @@ namespace _Scripts.Input
             OnCameraMove?.Invoke(inputVector);
         }
     
-        private void OMoveCameraCanceled(InputAction.CallbackContext ctx)
+        private void MoveCameraCanceled(InputAction.CallbackContext ctx)
         {
             OnCameraMove?.Invoke(Vector2.zero);
         }
@@ -47,7 +58,9 @@ namespace _Scripts.Input
         private void OnDisable()
         {
             _playerInput.actions["MoveCamera"].performed -= MoveCameraPerformed;
-            _playerInput.actions["MoveCamera"].canceled -= OMoveCameraCanceled;
+            _playerInput.actions["MoveCamera"].canceled -= MoveCameraCanceled;
+            
+            _playerInput.actions["MouseMovement"].performed -= MoveMousePerformed;
         }
     }
 }

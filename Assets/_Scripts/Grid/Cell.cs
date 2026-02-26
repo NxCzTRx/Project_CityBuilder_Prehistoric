@@ -6,7 +6,7 @@ namespace _Scripts.Grid
     {
         public Vector2Int Position { get; private set; }
         public bool IsOccupied { get; private set; }
-        public bool IsWalkable { get; set; }
+        public bool IsWalkable { get; private set; }
 
         public Cell(Vector2Int position)
         {
