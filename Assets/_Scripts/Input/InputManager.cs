@@ -12,8 +12,8 @@ namespace _Scripts.Input
         private PlayerInput _playerInput;
     
         public event Action<Vector2> OnCameraMove;
-        
         public event Action<Vector2> OnMouseMove;
+        public event Action OnBuild;
         
     
         private void Awake()
@@ -35,7 +35,14 @@ namespace _Scripts.Input
             _playerInput.actions["MoveCamera"].performed += MoveCameraPerformed;
             _playerInput.actions["MoveCamera"].canceled += MoveCameraCanceled;
             
+            _playerInput.actions["Build"].started += BuildPerformed;
+            
             _playerInput.actions["MouseMovement"].performed += MoveMousePerformed; //MANY CALLS
+        }
+
+        private void BuildPerformed(InputAction.CallbackContext ctx)
+        {
+            OnBuild?.Invoke();
         }
 
         private void MoveMousePerformed(InputAction.CallbackContext ctx)
@@ -59,6 +66,8 @@ namespace _Scripts.Input
         {
             _playerInput.actions["MoveCamera"].performed -= MoveCameraPerformed;
             _playerInput.actions["MoveCamera"].canceled -= MoveCameraCanceled;
+            
+            _playerInput.actions["Build"].started -= BuildPerformed;
             
             _playerInput.actions["MouseMovement"].performed -= MoveMousePerformed;
         }

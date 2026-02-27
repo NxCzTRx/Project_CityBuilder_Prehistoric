@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BuildingSO
   buildingWidth: 3
   buildingHeight: 2
+  buildingPrefab: {fileID: 3471649582723213855, guid: c9383a73d7ea4124bbbdb945cb5f350f, type: 3}
