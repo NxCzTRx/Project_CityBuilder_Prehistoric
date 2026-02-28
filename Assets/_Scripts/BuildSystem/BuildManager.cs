@@ -74,6 +74,20 @@ namespace _Scripts.BuildSystem
             ghostBuilding.SetValidPlacementColor(
                 _placementController.IsValidPlacement(_currentPlacement.gridOrigin, selectedBuildingData));
         }
+        
+        public void SetBuildManagerActive(bool isActive)
+        {
+            if (isActive)
+            {
+                Cursor.visible = false;
+                ghostBuilding.gameObject.SetActive(true);
+            }
+            else
+            {
+                Cursor.visible = true;
+                ghostBuilding.gameObject.SetActive(false);
+            }
+        }
     
         private void OnDisable()
         {

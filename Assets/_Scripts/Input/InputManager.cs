@@ -22,10 +22,11 @@ namespace _Scripts.Input
         {
             _playerInput.actions["MoveCamera"].performed += MoveCameraPerformed;
             _playerInput.actions["MoveCamera"].canceled += MoveCameraCanceled;
-            
-            _playerInput.actions["Build"].started += BuildPerformed;
-            
+                
             _playerInput.actions["MouseMovement"].performed += MoveMousePerformed;
+            _playerInput.actions["MoveBuildCamera"].performed += MoveCameraPerformed;
+            _playerInput.actions["MoveBuildCamera"].canceled += MoveCameraPerformed;
+            _playerInput.actions["Build"].started += BuildPerformed;
         }
 
         private void BuildPerformed(InputAction.CallbackContext ctx)
@@ -50,14 +51,21 @@ namespace _Scripts.Input
             OnCameraMove?.Invoke(Vector2.zero);
         }
 
+        //TEST PURPOSE ONLY
+        public void ChangeCurrentScheme(string schemeName)
+        {
+            _playerInput.SwitchCurrentActionMap(schemeName);
+        }
+
         private void OnDisable()
         {
             _playerInput.actions["MoveCamera"].performed -= MoveCameraPerformed;
             _playerInput.actions["MoveCamera"].canceled -= MoveCameraCanceled;
             
-            _playerInput.actions["Build"].started -= BuildPerformed;
-            
             _playerInput.actions["MouseMovement"].performed -= MoveMousePerformed;
+            _playerInput.actions["MoveBuildCamera"].performed -= MoveCameraPerformed;
+            _playerInput.actions["MoveBuildCamera"].canceled -= MoveCameraPerformed;
+            _playerInput.actions["Build"].started -= BuildPerformed;
         }
     }
 }

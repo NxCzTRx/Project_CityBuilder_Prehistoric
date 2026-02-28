@@ -4,9 +4,9 @@ namespace _Scripts.Grid
 {
     public class GridManager
     {
-        private int _gridWidth = 20;
-        private int _gridHeight = 20;
-        private float _cellSize = 1f;
+        private readonly int _gridWidth = 20;
+        private readonly int _gridHeight = 20;
+        private readonly float _cellSize = 1f;
         public float CellSize => _cellSize;
     
         public GridManager(int width, int height, float cellSize)
