@@ -7,27 +7,15 @@ namespace _Scripts.Input
 {
     public class InputManager : MonoBehaviour
     {
-        public static InputManager Instance;
-    
         private PlayerInput _playerInput;
     
         public event Action<Vector2> OnCameraMove;
         public event Action<Vector2> OnMouseMove;
         public event Action OnBuild;
         
-    
         private void Awake()
         {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-                _playerInput = GetComponent<PlayerInput>();
-                DontDestroyOnLoad(gameObject);
-            }
+            _playerInput = GetComponent<PlayerInput>();
         }
 
         private void OnEnable()
@@ -37,7 +25,7 @@ namespace _Scripts.Input
             
             _playerInput.actions["Build"].started += BuildPerformed;
             
-            _playerInput.actions["MouseMovement"].performed += MoveMousePerformed; //MANY CALLS
+            _playerInput.actions["MouseMovement"].performed += MoveMousePerformed;
         }
 
         private void BuildPerformed(InputAction.CallbackContext ctx)

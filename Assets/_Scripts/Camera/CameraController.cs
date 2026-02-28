@@ -1,4 +1,5 @@
 using System.Collections;
+using _Scripts.Core;
 using _Scripts.Input;
 using UnityEngine;
 
@@ -12,10 +13,30 @@ namespace _Scripts.Camera
         private Vector3 currentDirection = Vector3.zero;
         private Vector3 inputDirection = Vector3.zero;
         private float t = 0f;
+        
+        private bool _isPreviouslyInitialized = false;
+        
+        private InputManager _inputManager;
     
+        public void Init(ObjectResolver objectResolver)
+        {
+            _inputManager = objectResolver.Resolve<InputManager>();
+            
+            InitializeInput();
+        }
+        
         private void OnEnable()
         {
-            StartCoroutine(SubscribeWhenReady());
+            if (!_isPreviouslyInitialized)
+                return;
+            
+            InitializeInput();
+        }
+
+        private void InitializeInput()
+        {
+            _inputManager.OnCameraMove += HandleCameraMove;
+            _isPreviouslyInitialized = true;
         }
 
         void Update()
@@ -33,7 +54,7 @@ namespace _Scripts.Camera
                 }
             }
         
-            transform.position += currentDirection * speed * Time.deltaTime;
+            transform.position += currentDirection * (speed * Time.deltaTime);
         }
 
         private void HandleCameraMove(Vector2 inputVector)
@@ -41,18 +62,10 @@ namespace _Scripts.Camera
             inputDirection = inputVector;
             t = 0f;
         }
-
-        private IEnumerator SubscribeWhenReady()
-        {
-            while (InputManager.Instance == null)
-                yield return null;
         
-            InputManager.Instance.OnCameraMove += HandleCameraMove;
-        }
-
         private void OnDisable()
         {
-            InputManager.Instance.OnCameraMove -= HandleCameraMove;
+            _inputManager.OnCameraMove -= HandleCameraMove;
         }
     }
 }

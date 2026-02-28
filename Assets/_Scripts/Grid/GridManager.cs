@@ -1,29 +1,32 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace _Scripts.Grid
 {
-    public class GridManager : MonoBehaviour
+    public class GridManager
     {
-        [SerializeField] private int gridWidth = 20;
-        [SerializeField] private int gridHeight = 20;
-        [SerializeField] private float cellSize = 1f;
-        public float CellSize => cellSize;
+        private int _gridWidth = 20;
+        private int _gridHeight = 20;
+        private float _cellSize = 1f;
+        public float CellSize => _cellSize;
     
-        private Cell[,] _grid;
-
-        private void Awake()
+        public GridManager(int width, int height, float cellSize)
         {
+            _gridWidth = width;
+            _gridHeight = height;
+            _cellSize = cellSize;
+
             CreateGrid();
         }
+        
+        private Cell[,] _grid;
 
         private void CreateGrid()
         {
-            _grid = new Cell[gridWidth, gridHeight];
+            _grid = new Cell[_gridWidth, _gridHeight];
 
-            for (int x = 0; x < gridWidth; x++)
+            for (int x = 0; x < _gridWidth; x++)
             {
-                for (int y = 0; y < gridHeight; y++)
+                for (int y = 0; y < _gridHeight; y++)
                 {
                     _grid[x, y] = new Cell(new Vector2Int(x, y));
                 }
@@ -32,8 +35,8 @@ namespace _Scripts.Grid
 
         private bool IsValidPosition(Vector2Int position)
         {
-            return position.x >= 0 && position.x < gridWidth && 
-                   position.y >= 0 && position.y < gridHeight;
+            return position.x >= 0 && position.x < _gridWidth && 
+                   position.y >= 0 && position.y < _gridHeight;
         }
 
         public Cell GetCell(Vector2Int position) =>
@@ -45,16 +48,16 @@ namespace _Scripts.Grid
         {
             if (_grid is null) return;
         
-            for (int x = 0; x < gridWidth; x++)
+            for (int x = 0; x < _gridWidth; x++)
             {
-                for (int y = 0; y < gridHeight; y++)
+                for (int y = 0; y < _gridHeight; y++)
                 {
                     Vector3 cellPosition = new Vector3(
-                        _grid[x, y].Position.x * cellSize + cellSize / 2f, 
-                        _grid[x, y].Position.y * cellSize + cellSize / 2f, 
+                        _grid[x, y].Position.x * _cellSize + _cellSize / 2f, 
+                        _grid[x, y].Position.y * _cellSize + _cellSize / 2f, 
                         0f);
                     Gizmos.color = _grid[x, y].IsWalkable ? Color.green : Color.red;
-                    Gizmos.DrawWireCube(cellPosition, Vector3.one * cellSize);
+                    Gizmos.DrawWireCube(cellPosition, Vector3.one * _cellSize);
                 }
             }
         }

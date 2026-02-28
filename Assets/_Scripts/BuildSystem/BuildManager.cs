@@ -1,3 +1,4 @@
+using _Scripts.Core;
 using _Scripts.Grid;
 using _Scripts.Input;
 using UnityEngine;
@@ -6,33 +7,51 @@ namespace _Scripts.BuildSystem
 {
     public class BuildManager : MonoBehaviour
     {
-        [SerializeField] private PlacementController placementController;
+        private PlacementController _placementController;
         [SerializeField] private GhostBuilding ghostBuilding;
         [SerializeField] private BuildController buildController;
         
         [SerializeField] private BuildingSO selectedBuildingData; //Take off serialize, test purpose only
         
         private (Vector2Int gridOrigin, Vector2 worldCenter) _currentPlacement = new(Vector2Int.zero, Vector2.zero);
-    
-        //TEMP
-        [SerializeField] private GridManager gridManager;
-        [SerializeField] private InputManager inputManager;
-        //
+        
+        private GridManager _gridManager;
+        private InputManager _inputManager;
+
+        private bool _isPreviouslyInitialized = false;
+        private UnityEngine.Camera _mainCamera;
+        
+        public void Init(ObjectResolver objectResolver)
+        {
+            _gridManager = objectResolver.Resolve<GridManager>();
+            _inputManager = objectResolver.Resolve<InputManager>();
+
+            _placementController = new PlacementController(_gridManager);
+            buildController.Init(_gridManager);
+
+            _mainCamera = UnityEngine.Camera.main;
+
+            InitializeInput();
+        }
+        
         private void OnEnable()
         {
-            inputManager.OnMouseMove += HandleBuildingPlacement;
-            inputManager.OnBuild += HandleBuildRequest;
+            if (!_isPreviouslyInitialized)
+                return;
+            
+            InitializeInput();
         }
-
-        private void Start()
+        
+        private void InitializeInput()
         {
-            placementController.Init(gridManager);
-            buildController.Init(gridManager);
+            _inputManager.OnMouseMove += HandleBuildingPlacement;
+            _inputManager.OnBuild += HandleBuildRequest;
+            _isPreviouslyInitialized = true;
         }
         
         private void HandleBuildRequest()
         {
-            if (placementController.IsValidPlacement(_currentPlacement.gridOrigin))
+            if (_placementController.IsValidPlacement(_currentPlacement.gridOrigin, selectedBuildingData))
             {
                 buildController.Build(
                     _currentPlacement.gridOrigin, _currentPlacement.worldCenter, selectedBuildingData);
@@ -41,28 +60,25 @@ namespace _Scripts.BuildSystem
 
         private void HandleBuildingPlacement(Vector2 mousePosition)
         {
-            var cellPos = GetCellFromMousePosition(mousePosition);
-            var centerCell = gridManager.GetCell(cellPos);
+            var cellPos = GridUtils.GetCellFromMousePosition(
+                mousePosition, _mainCamera, _gridManager.CellSize);
+            
+            var centerCell = _gridManager.GetCell(cellPos);
 
             if (centerCell == null) return;
         
-            var placement = placementController.GetBuildingPlacement(centerCell);
-            _currentPlacement = placement;
-            
+            _currentPlacement = _placementController.GetBuildingPlacement(
+                centerCell, selectedBuildingData);
+
             ghostBuilding.MoveGhost(_currentPlacement.worldCenter);
-            ghostBuilding.SetValidPlacementColor(placementController.IsValidPlacement(_currentPlacement.gridOrigin));
-        }
-    
-        private Vector2Int GetCellFromMousePosition(Vector2 mousePosition)
-        {
-            return GridUtils.WorldToGridPosition(
-                UnityEngine.Camera.main.ScreenToWorldPoint(mousePosition), gridManager.CellSize);
+            ghostBuilding.SetValidPlacementColor(
+                _placementController.IsValidPlacement(_currentPlacement.gridOrigin, selectedBuildingData));
         }
     
         private void OnDisable()
         {
-            inputManager.OnMouseMove -= HandleBuildingPlacement;
-            inputManager.OnBuild -= HandleBuildRequest;
+            _inputManager.OnMouseMove -= HandleBuildingPlacement;
+            _inputManager.OnBuild -= HandleBuildRequest;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace _Scripts.Grid
         }
 
         /// <summary>
-        /// Retruns a position in world space corresponding to the center of the area
+        /// Returns a position in world space corresponding to the center of the area
         /// defined by the given grid origin (bottom-left cell) and size.
         /// </summary>
         /// <param name="x"></param>
@@ -48,5 +48,21 @@ namespace _Scripts.Grid
                 origin.y * cellSize + height / 2f, 
                 0);
         }
+        
+        /// <summary>
+        /// Returns the grid position corresponding to the given mouse position in screen space,
+        /// based on the camera and cell size.
+        /// </summary>
+        /// <param name="mousePosition"></param>
+        /// <param name="camera"></param>
+        /// <param name="cellSize"></param>
+        /// <returns></returns>
+        public static Vector2Int GetCellFromMousePosition(
+            Vector2 mousePosition,
+            UnityEngine.Camera camera,
+            float cellSize)
+        { 
+            return WorldToGridPosition(camera.ScreenToWorldPoint(mousePosition), cellSize);
+        } 
     }
 }
