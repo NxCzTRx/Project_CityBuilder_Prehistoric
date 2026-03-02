@@ -1,7 +1,7 @@
-using System;
 using _Scripts.BuildSystem;
 using _Scripts.Camera;
 using _Scripts.Core.GameMode;
+using _Scripts.Core.UpdateManagement;
 using _Scripts.Core.GameMode.Modes;
 using _Scripts.Grid;
 using _Scripts.Input;
@@ -16,16 +16,23 @@ namespace _Scripts.Core
         
         private GridManager _gridManager;
         private GameModeManager _gameModeManager;
+
+        private UpdateManager _updateManager;
         
         [SerializeField] private BuildManager buildManager;
         [SerializeField] private InputManager inputManager;
         
         [SerializeField] private CameraController cameraController;
+        
+        
 
         private void Awake()
         {
+            var updateManagerGO = new GameObject("UpdateManager");
+            _updateManager = updateManagerGO.AddComponent<UpdateManager>();
+            
             _gridManager = new GridManager(20, 20, 1f);
-            _gameModeManager = new GameModeManager(new DefaultGameMode(inputManager), inputManager);
+            _gameModeManager = new GameModeManager(new DefaultGameMode(inputManager));
             
             _objectResolver.RegisterInstance(buildManager);
             _objectResolver.RegisterInstance(_gridManager);

@@ -1,11 +1,12 @@
 using System.Collections;
 using _Scripts.Core;
+using _Scripts.Core.UpdateManagement;
 using _Scripts.Input;
 using UnityEngine;
 
 namespace _Scripts.Camera
 {
-    public class CameraController : MonoBehaviour
+    public class CameraController : MonoBehaviour, IUpdateObserver
     {
         [SerializeField] private float speed;
         [SerializeField] private float accelerationTime;
@@ -27,6 +28,8 @@ namespace _Scripts.Camera
         
         private void OnEnable()
         {
+            UpdateManager.RegisterObserver(this);
+            
             if (!_isPreviouslyInitialized)
                 return;
             
@@ -39,7 +42,9 @@ namespace _Scripts.Camera
             _isPreviouslyInitialized = true;
         }
 
-        void Update()
+        
+        
+        public void ObservedUpdate()
         {
             if (t < 1f)
             {
@@ -65,6 +70,8 @@ namespace _Scripts.Camera
         
         private void OnDisable()
         {
+            UpdateManager.UnregisterObserver(this);
+            
             _inputManager.OnCameraMove -= HandleCameraMove;
         }
     }

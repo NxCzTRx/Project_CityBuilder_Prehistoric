@@ -7,7 +7,7 @@ namespace _Scripts.Core.GameMode
         private IGameMode _currentGameMode;
         public IGameMode CurrentGameMode => _currentGameMode;
         
-        public GameModeManager(IGameMode initialGameMode, InputManager inputManager)
+        public GameModeManager(IGameMode initialGameMode)
         {
             _currentGameMode = initialGameMode;
         }
