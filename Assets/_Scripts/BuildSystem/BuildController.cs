@@ -20,6 +20,7 @@ namespace _Scripts.BuildSystem
                 {
                     var cell = _gridManager.GetCell(gridOrigin + new Vector2Int(x, y));
                     cell.IsOccupied = true;
+                    cell.IsWalkable = false;
                 }
             }
         

@@ -9,7 +9,7 @@ namespace _Scripts.Core
     {
         private readonly HashSet<Type> _registrations = new();
         private readonly Dictionary<Type, object> _instancePerType = new();
-    
+        
         public void Register<T>()
         {
             _registrations.Add(typeof(T));
@@ -51,6 +51,12 @@ namespace _Scripts.Core
             
             _instancePerType[instanceType] = instance;
             return instance;
+        }
+        
+        public void Clear()
+        {
+            _instancePerType.Clear();
+            _registrations.Clear();
         }
     }
 }

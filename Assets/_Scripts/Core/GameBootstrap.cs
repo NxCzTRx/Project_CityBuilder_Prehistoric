@@ -1,3 +1,4 @@
+using _Scripts.AI.Entities.Pawn;
 using _Scripts.BuildSystem;
 using _Scripts.Camera;
 using _Scripts.Core.GameMode;
@@ -24,6 +25,8 @@ namespace _Scripts.Core
         
         [SerializeField] private CameraController cameraController;
         
+        [SerializeField] private PawnEntity pawnEntityPrefab; //TEST
+        
         
 
         private void Awake()
@@ -34,12 +37,15 @@ namespace _Scripts.Core
             _gridManager = new GridManager(20, 20, 1f);
             _gameModeManager = new GameModeManager(new DefaultGameMode(inputManager));
             
+            pawnEntityPrefab = Instantiate(pawnEntityPrefab, Vector3.zero, Quaternion.identity);
+            
             _objectResolver.RegisterInstance(buildManager);
             _objectResolver.RegisterInstance(_gridManager);
             _objectResolver.RegisterInstance(inputManager);
         
             buildManager.Init(_objectResolver);
             cameraController.Init(_objectResolver);
+            pawnEntityPrefab.Init(_objectResolver);
         }
 
         private void Start()
@@ -56,9 +62,7 @@ namespace _Scripts.Core
 
         private void OnDestroy()
         {
-            _objectResolver.UnregisterInstance<BuildManager>();
-            _objectResolver.UnregisterInstance<GridManager>();
-            _objectResolver.UnregisterInstance<InputManager>();
+            _objectResolver.Clear();
         }
     }
 }
