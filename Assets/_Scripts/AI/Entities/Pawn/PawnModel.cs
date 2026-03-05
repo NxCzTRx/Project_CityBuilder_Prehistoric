@@ -1,3 +1,4 @@
+using System;
 using _Scripts.AI.Entities.Pawn.Roles;
 using _Scripts.Grid;
 using UnityEngine;
@@ -9,6 +10,32 @@ namespace _Scripts.AI.Entities.Pawn
         public GridManager GridManager { get; private set; }
         public PawnRoleType CurrentRole { get; set; } = PawnRoleType.None;
         public Cell CurrentCell;
+        
+        public Action<float> OnHealthChanged;
+        public Action<float> OnHungerChanged;
+        
+        private float _health = 100;
+        public float Health
+        {
+            get => _health;
+            set
+            {
+                _health = Mathf.Clamp(value, 0, 100);
+                OnHealthChanged?.Invoke(_health);
+                //Invoke Death
+            }
+        }
+        
+        private float _hunger = 100;
+        public float Hunger
+        {
+            get => _hunger;
+            set
+            {
+                _hunger = Mathf.Clamp(value, 0, 100);
+                OnHungerChanged?.Invoke(_hunger);
+            }
+        }
 
         public float Speed { get; set; } = 3f;
 
@@ -17,6 +44,5 @@ namespace _Scripts.AI.Entities.Pawn
             GridManager = gridManager;
             CurrentCell = GridManager.GetCell(GridUtils.WorldToGridPosition(position, gridManager.CellSize));
         }
-        //public TaskManager TaskManager { get; }
     }
 }

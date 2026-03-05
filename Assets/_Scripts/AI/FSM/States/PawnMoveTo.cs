@@ -43,6 +43,8 @@ namespace _Scripts.AI.FSM.States
 
             if (Controller.View.HasReached(next))
             {
+                Controller.View.transform.position = next;
+                
                 _path.Dequeue();
                 Controller.Model.CurrentCell = Controller.Model.GridManager.GetCell(
                     GridUtils.WorldToGridPosition(next, Controller.Model.GridManager.CellSize));

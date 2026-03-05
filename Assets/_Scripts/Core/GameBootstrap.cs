@@ -8,6 +8,7 @@ using _Scripts.Grid;
 using _Scripts.Input;
 using _Scripts.ResourcesSystem;
 using _Scripts.ResourcesSystem.Resources;
+using _Scripts.ResourcesSystem.UI;
 using UnityEngine;
 
 namespace _Scripts.Core
@@ -25,6 +26,7 @@ namespace _Scripts.Core
 
         private UpdateManager _updateManager;
         
+        [SerializeField] private SelectableController selectableController;
         [SerializeField] private BuildManager buildManager;
         [SerializeField] private InputManager inputManager;
         
@@ -53,6 +55,7 @@ namespace _Scripts.Core
             _objectResolver.RegisterInstance(inputManager);
             _objectResolver.RegisterInstance(_gameResourcesManager);
         
+            selectableController.Init(_objectResolver);
             buildManager.Init(_objectResolver);
             cameraController.Init(_objectResolver);
             pawnEntityPrefab.Init(_objectResolver);

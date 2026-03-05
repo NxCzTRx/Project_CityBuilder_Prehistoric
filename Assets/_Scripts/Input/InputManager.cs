@@ -12,6 +12,8 @@ namespace _Scripts.Input
         public event Action<Vector2> OnCameraMove;
         public event Action<Vector2> OnMouseMove;
         public event Action OnBuild;
+        public event Action OnSelect;
+        
         
         private void Awake()
         {
@@ -22,6 +24,7 @@ namespace _Scripts.Input
         {
             _playerInput.actions["MoveCamera"].performed += MoveCameraPerformed;
             _playerInput.actions["MoveCamera"].canceled += MoveCameraCanceled;
+            _playerInput.actions["Select"].started += Select;
                 
             _playerInput.actions["MouseMovement"].performed += MoveMousePerformed;
             _playerInput.actions["MoveBuildCamera"].performed += MoveCameraPerformed;
@@ -50,6 +53,11 @@ namespace _Scripts.Input
         {
             OnCameraMove?.Invoke(Vector2.zero);
         }
+        
+        private void Select(InputAction.CallbackContext ctx)
+        {
+            OnSelect?.Invoke();
+        }
 
         //TEST PURPOSE ONLY
         public void ChangeCurrentScheme(string schemeName)
@@ -61,6 +69,7 @@ namespace _Scripts.Input
         {
             _playerInput.actions["MoveCamera"].performed -= MoveCameraPerformed;
             _playerInput.actions["MoveCamera"].canceled -= MoveCameraCanceled;
+            _playerInput.actions["Select"].started -= Select;
             
             _playerInput.actions["MouseMovement"].performed -= MoveMousePerformed;
             _playerInput.actions["MoveBuildCamera"].performed -= MoveCameraPerformed;

@@ -6,7 +6,7 @@ namespace _Scripts.AI.FSM
     {
         private State<T> _currentState;
     
-        public void Tick()
+        public virtual void Tick()
         {
             _currentState?.OnUpdate();
         }
