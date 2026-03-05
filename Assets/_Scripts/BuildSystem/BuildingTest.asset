@@ -15,3 +15,6 @@ MonoBehaviour:
   buildingWidth: 3
   buildingHeight: 2
   buildingPrefab: {fileID: 3471649582723213855, guid: c9383a73d7ea4124bbbdb945cb5f350f, type: 3}
+  buildingCost:
+  - ResourceTypeSO: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}
+    Amount: 25

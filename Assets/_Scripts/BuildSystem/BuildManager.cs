@@ -1,6 +1,7 @@
 using _Scripts.Core;
 using _Scripts.Grid;
 using _Scripts.Input;
+using _Scripts.ResourcesSystem;
 using UnityEngine;
 
 namespace _Scripts.BuildSystem
@@ -17,6 +18,7 @@ namespace _Scripts.BuildSystem
         
         private GridManager _gridManager;
         private InputManager _inputManager;
+        private GameResourcesManager _gameResourcesManager;
 
         private bool _isPreviouslyInitialized = false;
         private UnityEngine.Camera _mainCamera;
@@ -25,6 +27,7 @@ namespace _Scripts.BuildSystem
         {
             _gridManager = objectResolver.Resolve<GridManager>();
             _inputManager = objectResolver.Resolve<InputManager>();
+            _gameResourcesManager = objectResolver.Resolve<GameResourcesManager>();
 
             _placementController = new PlacementController(_gridManager);
             buildController.Init(_gridManager);
@@ -51,11 +54,13 @@ namespace _Scripts.BuildSystem
         
         private void HandleBuildRequest()
         {
-            if (_placementController.IsValidPlacement(_currentPlacement.gridOrigin, selectedBuildingData))
-            {
-                buildController.Build(
-                    _currentPlacement.gridOrigin, _currentPlacement.worldCenter, selectedBuildingData);
-            }
+            if (!_placementController.IsValidPlacement(_currentPlacement.gridOrigin, selectedBuildingData) ||
+                !_gameResourcesManager.CanAfford(selectedBuildingData.BuildingCost))
+                return;
+            
+            _gameResourcesManager.RemoveResources(selectedBuildingData.BuildingCost);
+            buildController.Build(
+                _currentPlacement.gridOrigin, _currentPlacement.worldCenter, selectedBuildingData);
         }
 
         private void HandleBuildingPlacement(Vector2 mousePosition)
