@@ -13,6 +13,10 @@ namespace _Scripts.AI.Entities.Pawn
         
         public Action<float> OnHealthChanged;
         public Action<float> OnHungerChanged;
+        public Action OnDie;
+        
+        public float HungerDecayRate {get; private set;} = 0.75f;
+        public float HealthDecayRate {get; private set;} = 0.5f;
         
         private float _health = 100;
         public float Health
@@ -22,7 +26,9 @@ namespace _Scripts.AI.Entities.Pawn
             {
                 _health = Mathf.Clamp(value, 0, 100);
                 OnHealthChanged?.Invoke(_health);
-                //Invoke Death
+                
+                if (_health > 0) return;
+                OnDie?.Invoke();
             }
         }
         

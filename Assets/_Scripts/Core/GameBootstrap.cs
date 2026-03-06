@@ -21,6 +21,7 @@ namespace _Scripts.Core
         private GridManager _gridManager;
         private GameModeManager _gameModeManager;
         private GameResourcesManager _gameResourcesManager;
+        private PawnRegistry _pawnRegistry;
         
         [SerializeField] ResourceStock[] initialResources;
 
@@ -29,10 +30,9 @@ namespace _Scripts.Core
         [SerializeField] private SelectableController selectableController;
         [SerializeField] private BuildManager buildManager;
         [SerializeField] private InputManager inputManager;
+        [SerializeField] private PawnSpawner pawnSpawnerPrefab;
         
         [SerializeField] private CameraController cameraController;
-        
-        [SerializeField] private PawnEntity pawnEntityPrefab; //TEST
         
         [Header("UI")]
         [SerializeField] private PlayerResourcesUI playerResourcesUI;
@@ -43,22 +43,26 @@ namespace _Scripts.Core
         {
             var updateManagerGO = new GameObject("UpdateManager");
             _updateManager = updateManagerGO.AddComponent<UpdateManager>();
+
+            var pawnSpawner = Instantiate(pawnSpawnerPrefab);
             
             _gridManager = new GridManager(20, 20, 1f);
             _gameModeManager = new GameModeManager(new DefaultGameMode(inputManager));
             _gameResourcesManager = new GameResourcesManager(initialResources);
-            
-            pawnEntityPrefab = Instantiate(pawnEntityPrefab, Vector3.zero, Quaternion.identity);
+            _pawnRegistry = new PawnRegistry();
             
             _objectResolver.RegisterInstance(buildManager);
             _objectResolver.RegisterInstance(_gridManager);
             _objectResolver.RegisterInstance(inputManager);
             _objectResolver.RegisterInstance(_gameResourcesManager);
+            _objectResolver.RegisterInstance(_pawnRegistry);
         
             selectableController.Init(_objectResolver);
             buildManager.Init(_objectResolver);
             cameraController.Init(_objectResolver);
-            pawnEntityPrefab.Init(_objectResolver);
+            pawnSpawner.Init(_objectResolver);
+            
+            pawnSpawner.Spawn(Vector2.zero); //Test
             
             playerResourcesUI.Init(_gameResourcesManager);
         }

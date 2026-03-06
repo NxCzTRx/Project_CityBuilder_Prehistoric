@@ -17,5 +17,8 @@ namespace _Scripts.BuildSystem
     
         public ResourceStock[] BuildingCost => buildingCost;
         [SerializeField] private ResourceStock[] buildingCost;
+
+        public int MaxWorkers => maxWorkers;
+        [SerializeField] private int maxWorkers;
     }
 }
