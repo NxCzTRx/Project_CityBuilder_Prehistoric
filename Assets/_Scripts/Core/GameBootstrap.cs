@@ -72,11 +72,17 @@ namespace _Scripts.Core
             Cursor.visible = true;
         }
         
-        //Test method, will be triggered by UI button for now
-        public void ChangeGameMode()
+        //Test methods, will be triggered by UI button for now
+        public void ChangeGameModeToBuild()
         {
             _gameModeManager.ChangeGameMode(new BuildGameMode(inputManager, buildManager));
         }
+        
+        public void ChangeGameModeToDefault()
+        {
+            _gameModeManager.ChangeGameMode(new DefaultGameMode(inputManager));
+        }
+        //
 
         private void OnDestroy()
         {

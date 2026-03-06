@@ -13,7 +13,6 @@ namespace _Scripts.Input
         public event Action<Vector2> OnMouseMove;
         public event Action OnBuild;
         public event Action OnSelect;
-        public event Action OnSwapGameMode;
         
         
         private void Awake()
@@ -26,18 +25,11 @@ namespace _Scripts.Input
             _playerInput.actions["MoveCamera"].performed += MoveCameraPerformed;
             _playerInput.actions["MoveCamera"].canceled += MoveCameraCanceled;
             _playerInput.actions["Select"].started += Select;
-            _playerInput.actions["SwapToBuildMode"].started += SwapMode;
                 
             _playerInput.actions["MouseMovement"].performed += MoveMousePerformed;
             _playerInput.actions["MoveBuildCamera"].performed += MoveCameraPerformed;
             _playerInput.actions["MoveBuildCamera"].canceled += MoveCameraPerformed;
             _playerInput.actions["Build"].started += BuildPerformed;
-            _playerInput.actions["SwapToGameplayMode"].started += SwapMode;
-        }
-
-        private void SwapMode(InputAction.CallbackContext ctx)
-        {
-            OnSwapGameMode?.Invoke();
         }
 
         private void BuildPerformed(InputAction.CallbackContext ctx)
@@ -78,13 +70,11 @@ namespace _Scripts.Input
             _playerInput.actions["MoveCamera"].performed -= MoveCameraPerformed;
             _playerInput.actions["MoveCamera"].canceled -= MoveCameraCanceled;
             _playerInput.actions["Select"].started -= Select;
-            _playerInput.actions["SwapToBuildMode"].started -= SwapMode;
             
             _playerInput.actions["MouseMovement"].performed -= MoveMousePerformed;
             _playerInput.actions["MoveBuildCamera"].performed -= MoveCameraPerformed;
             _playerInput.actions["MoveBuildCamera"].canceled -= MoveCameraPerformed;
             _playerInput.actions["Build"].started -= BuildPerformed;
-            _playerInput.actions["SwapToGameplayMode"].started -= SwapMode;
         }
     }
 }
