@@ -6,6 +6,9 @@ namespace _Scripts.BuildSystem
     [CreateAssetMenu(fileName = "BuildingSO", menuName = "Scriptable Objects/BuildingSO")]
     public class BuildingSO : ScriptableObject
     {
+        public string BuildingName => buildingName;
+        [SerializeField] private string buildingName;
+        
         public int BuildingWidth => buildingWidth;
         [SerializeField] private int buildingWidth;
     

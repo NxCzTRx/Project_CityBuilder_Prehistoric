@@ -143,6 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84343ea34aa11934fa59749a3f9a0342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingHUD
+  buildingNameTMP: {fileID: 8266534424243904980}
+  addWorkerButton: {fileID: 7236471953827469632}
+  removeWorkerButton: {fileID: 6882217174073613069}
+  workerNumberTMP: {fileID: 2832727051510548635}
 --- !u!1 &3471649582723213855
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +668,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6688484374246829522}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7118067644355192128}
+        m_TargetAssemblyTypeName: _Scripts.BuildSystem.Building.BuildingHUD, Assembly-CSharp
+        m_MethodName: AddWorker
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6074048693132294790
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +831,7 @@ GameObject:
   - component: {fileID: 7489680679122057476}
   - component: {fileID: 6882217174073613069}
   m_Layer: 0
-  m_Name: Subtract
+  m_Name: SubtractButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -921,4 +937,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7489680679122057476}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7118067644355192128}
+        m_TargetAssemblyTypeName: _Scripts.BuildSystem.Building.BuildingHUD, Assembly-CSharp
+        m_MethodName: RemoveWorker
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

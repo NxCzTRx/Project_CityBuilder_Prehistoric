@@ -11,7 +11,7 @@ namespace _Scripts.Core.GameMode
         {
             _currentGameMode = initialGameMode;
         }
-        
+
         public void ChangeGameMode(IGameMode newGameMode)
         {
             _currentGameMode?.Exit();

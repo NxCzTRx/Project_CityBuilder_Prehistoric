@@ -1,3 +1,4 @@
+using System;
 using _Scripts.AI.Entities.Pawn;
 using _Scripts.BuildSystem;
 using _Scripts.Camera;
@@ -37,8 +38,6 @@ namespace _Scripts.Core
         [Header("UI")]
         [SerializeField] private PlayerResourcesUI playerResourcesUI;
         
-        
-
         private void Awake()
         {
             var updateManagerGO = new GameObject("UpdateManager");

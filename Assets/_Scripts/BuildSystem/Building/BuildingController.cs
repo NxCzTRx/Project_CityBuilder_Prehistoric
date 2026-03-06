@@ -1,4 +1,5 @@
 using _Scripts.AI.Entities.Pawn;
+using _Scripts.Core;
 
 namespace _Scripts.BuildSystem.Building
 {
@@ -7,10 +8,12 @@ namespace _Scripts.BuildSystem.Building
         public BuildingModel Model { get; }
         public BuildingView View { get; }
 
-        public BuildingController(BuildingModel model, BuildingView view)
+        public BuildingController(BuildingModel model, BuildingView view, PawnRegistry pawnRegistry)
         {
             Model = model;
             View = view;
+
+            View.Init(this, pawnRegistry);
         }
 
         public bool HasSpace => Model.PawnWorkers.Count < Model.BuildingSO.MaxWorkers;

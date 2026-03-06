@@ -30,7 +30,7 @@ namespace _Scripts.BuildSystem
             _gameResourcesManager = objectResolver.Resolve<GameResourcesManager>();
 
             _placementController = new PlacementController(_gridManager);
-            buildController.Init(_gridManager);
+            buildController.Init(_gridManager, objectResolver);
 
             _mainCamera = UnityEngine.Camera.main;
 
