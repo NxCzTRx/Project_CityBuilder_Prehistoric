@@ -1,7 +1,7 @@
-using System;
 using _Scripts.Core;
 using _Scripts.Input;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class SelectableController : MonoBehaviour
@@ -39,6 +39,9 @@ public class SelectableController : MonoBehaviour
 
     private void Select()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        
         Vector2 mousePos = _camera.ScreenToWorldPoint(Mouse.current.position.ReadValue());
     
         RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);

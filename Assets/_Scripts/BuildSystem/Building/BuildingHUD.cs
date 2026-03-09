@@ -1,3 +1,4 @@
+using _Scripts.AI.Entities.Pawn.Roles;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

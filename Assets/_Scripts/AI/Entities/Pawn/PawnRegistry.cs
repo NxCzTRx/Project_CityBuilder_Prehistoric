@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _Scripts.AI.Entities.Pawn;
 using _Scripts.AI.Entities.Pawn.Roles;
+using UnityEngine;
 
 public class PawnRegistry
 {
@@ -10,12 +11,12 @@ public class PawnRegistry
     public void RegisterPawn(PawnController pawnController)
     {
         _pawns.Add(pawnController);
+        Debug.Log(_pawns.Count + " pawns registered");
     }
 
     public void UnregisterPawn(PawnController pawnController)
     {
         _pawns.Remove(pawnController);
-        //Destruir
     }
 
     public bool HasAvailablePawn => _pawns.Any(p => p.Model.CurrentRole == PawnRoleType.None);

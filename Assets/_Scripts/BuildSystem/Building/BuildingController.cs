@@ -1,4 +1,5 @@
 using _Scripts.AI.Entities.Pawn;
+using _Scripts.AI.Entities.Pawn.Roles;
 using _Scripts.Core;
 
 namespace _Scripts.BuildSystem.Building
@@ -22,12 +23,14 @@ namespace _Scripts.BuildSystem.Building
         {
             if (!HasSpace) return;
             Model.PawnWorkers.Push(pawnController);
+            pawnController.Model.CurrentRole = PawnRoleType.Employee;
         }
 
         public void RemoveWorker()
         {
             if (Model.PawnWorkers.Count == 0) return;
-            Model.PawnWorkers.Pop();
+            var pawn = Model.PawnWorkers.Pop();
+            pawn.Model.CurrentRole = PawnRoleType.None;
         }
     }
 }

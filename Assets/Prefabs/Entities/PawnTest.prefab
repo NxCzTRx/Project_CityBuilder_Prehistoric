@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 1884268873846119255}
   - component: {fileID: 2880481332160544035}
   m_Layer: 0
-  m_Name: Hunger
+  m_Name: HungerTMP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
