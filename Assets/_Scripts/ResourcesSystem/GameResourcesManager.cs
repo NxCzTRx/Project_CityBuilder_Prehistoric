@@ -2,14 +2,15 @@ using System;
 using System.Collections.Generic;
 using _Scripts.ResourcesSystem.Resources;
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
+using UnityEngine;
 
 namespace _Scripts.ResourcesSystem
 {
     public class GameResourcesManager
     {
-        private readonly Dictionary<ResourceTypeSO, int> _resourcesAmount = new();
+        private readonly Dictionary<ResourceTypeSO, float> _resourcesAmount = new();
         
-        public event Action<ResourceTypeSO, int> OnResourceAmountChanged;
+        public event Action<ResourceTypeSO, float> OnResourceAmountChanged;
 
         public GameResourcesManager(params ResourceStock[] resources)
         {
@@ -25,7 +26,7 @@ namespace _Scripts.ResourcesSystem
         }
 
 
-        public int GetAmount(ResourceTypeSO resource)
+        private float GetAmount(ResourceTypeSO resource)
         {
             if (_resourcesAmount.TryGetValue(resource, out var amount))
                 return amount;
@@ -40,11 +41,7 @@ namespace _Scripts.ResourcesSystem
             var index = 0;
             foreach (var resource in _resourcesAmount)
             {
-                resources[index] = new ResourceStock
-                {
-                    ResourceTypeSO = resource.Key,
-                    Amount = resource.Value
-                };
+                resources[index] = new ResourceStock(resource.Key, resource.Value);
                 index++;
             }
             return resources;

@@ -39,7 +39,7 @@ namespace _Scripts.ResourcesSystem.UI
             _gameResourcesManager.OnResourceAmountChanged += UpdateResourceAmount;
         }
 
-        private void UpdateResourceAmount(ResourceTypeSO resourceTypeSO, int newAmount)
+        private void UpdateResourceAmount(ResourceTypeSO resourceTypeSO, float newAmount)
         {
             if (_rows.TryGetValue(resourceTypeSO, out var row))
                 row.UpdateAmount(newAmount);

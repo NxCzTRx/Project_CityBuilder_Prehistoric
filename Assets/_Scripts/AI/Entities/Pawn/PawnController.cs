@@ -1,5 +1,6 @@
 using _Scripts.AI.FSM;
 using _Scripts.AI.FSM.States;
+using _Scripts.Core;
 using _Scripts.Grid;
 using UnityEngine;
 
@@ -11,17 +12,24 @@ namespace _Scripts.AI.Entities.Pawn
         public PawnModel Model { get; }
         public PawnView View { get; }
         public PawnSpawner MySpawner { get; }
+        public ObjectResolver Resolver { get; }
 
-        public PawnController(PawnModel model, PawnView view, PawnEntity entity ,PawnSpawner spawner)
+        public PawnController(
+            PawnModel model, 
+            PawnView view, 
+            PawnEntity entity ,
+            PawnSpawner spawner, 
+            ObjectResolver resolver)
         {
             Model = model;
             View = view;
             MySpawner = spawner;
             _entity = entity;
+            Resolver = resolver;
             
-            View.Init(model);
-            ChangeState(new PawnMoveTo(this, Model.GridManager.GetCell(
-                GridUtils.WorldToGridPosition(Vector3.zero, Model.GridManager.CellSize)))); //ASSIGN MAIN BASE (HOUSE)
+            View.Init(model); 
+            
+            //ASSIGN MAIN BASE (HOUSE)
 
             Model.OnDie += Die;
         }

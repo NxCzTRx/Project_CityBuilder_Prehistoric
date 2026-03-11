@@ -12,10 +12,14 @@ namespace _Scripts.AI.FSM.States
         private Cell _targetCell;
         private Queue<Vector3> _path;
         
+        private GridManager _gridManager;
+        
         public PawnMoveTo(PawnController controller, Cell targetCell) : base(controller)
         {
             Controller = controller;
             _targetCell = targetCell;
+            
+            _gridManager = Controller.Resolver.Resolve<GridManager>();
         }
 
         public override void OnEnter()
@@ -23,11 +27,11 @@ namespace _Scripts.AI.FSM.States
             var gridPositions = AStar.FindPath(
                 Controller.Model.CurrentCell,
                 _targetCell, 
-                Controller.Model.GridManager);
+                _gridManager);
             
                 _path = new Queue<Vector3>(
                     gridPositions.Select(p => GridUtils.CellToWorldPosition(
-                        p, Controller.Model.GridManager.CellSize)));
+                        p, _gridManager.CellSize)));
         }
 
         public override void OnUpdate()
@@ -46,8 +50,8 @@ namespace _Scripts.AI.FSM.States
                 Controller.View.transform.position = next;
                 
                 _path.Dequeue();
-                Controller.Model.CurrentCell = Controller.Model.GridManager.GetCell(
-                    GridUtils.WorldToGridPosition(next, Controller.Model.GridManager.CellSize));
+                Controller.Model.CurrentCell = _gridManager.GetCell(
+                    GridUtils.WorldToGridPosition(next, _gridManager.CellSize));
             }
         }
 

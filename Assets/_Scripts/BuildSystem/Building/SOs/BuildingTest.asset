@@ -20,3 +20,6 @@ MonoBehaviour:
   - ResourceTypeSO: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}
     Amount: 25
   maxWorkers: 2
+  productionPerSecond: 0.1
+  resourceProduction: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}
+  workCellFromGridOrigin: 1

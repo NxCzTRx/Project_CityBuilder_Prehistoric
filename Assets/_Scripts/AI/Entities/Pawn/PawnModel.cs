@@ -1,15 +1,18 @@
 using System;
 using _Scripts.AI.Entities.Pawn.Roles;
+using _Scripts.BuildSystem.Building;
 using _Scripts.Grid;
+using _Scripts.ResourcesSystem;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 namespace _Scripts.AI.Entities.Pawn
 {
     public class PawnModel
     {
-        public GridManager GridManager { get; private set; }
         public PawnRoleType CurrentRole { get; set; } = PawnRoleType.None;
         public Cell CurrentCell;
+        public BuildingController BuildingController {get; set;}
         
         public Action<float> OnHealthChanged;
         public Action<float> OnHungerChanged;
@@ -47,8 +50,8 @@ namespace _Scripts.AI.Entities.Pawn
 
         public PawnModel(GridManager gridManager, Vector3 position)
         {
-            GridManager = gridManager;
-            CurrentCell = GridManager.GetCell(GridUtils.WorldToGridPosition(position, gridManager.CellSize));
+            CurrentCell = gridManager.GetCell(
+                GridUtils.WorldToGridPosition(position, gridManager.CellSize));
         }
     }
 }

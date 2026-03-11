@@ -2,6 +2,7 @@ using System;
 using _Scripts.AI.Entities.Pawn.UI;
 using _Scripts.AI.FSM;
 using _Scripts.AI.FSM.States;
+using _Scripts.BuildSystem;
 using _Scripts.Core;
 using _Scripts.Core.UpdateManagement;
 using _Scripts.Grid;
@@ -20,10 +21,10 @@ namespace _Scripts.AI.Entities.Pawn
         {
             _gridManager = objectResolver.Resolve<GridManager>();
             
-            var model = new PawnModel(_gridManager, transform.position);
+            var model = new PawnModel(objectResolver.Resolve<GridManager>(), transform.position);
             var view = GetComponent<PawnView>();
 
-            PawnController = new PawnController(model, view, this, mySpawner);
+            PawnController = new PawnController(model, view, this, mySpawner, objectResolver);
             PawnController.ChangeState(new PawnMoveTo(PawnController, _gridManager.GetCell(new Vector2Int(10, 0))));
             
             UpdateManager.RegisterObserver(this);

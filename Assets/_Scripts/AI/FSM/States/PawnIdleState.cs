@@ -10,9 +10,14 @@ namespace _Scripts.AI.FSM.States
     {
         //Test counter for idle state
         private float _idleTime;
+        
+        private GridManager _gridManager;
+        
         public PawnIdleState(PawnController controller) : base(controller)
         {
             Controller = controller;
+
+            _gridManager = Controller.Resolver.Resolve<GridManager>();
         }
 
         public override void OnEnter()
@@ -29,7 +34,7 @@ namespace _Scripts.AI.FSM.States
             {
                 // After idling for 2 seconds, move to a random position
                 Controller.ChangeState(new PawnMoveTo(Controller,
-                    Controller.Model.GridManager.GetCell(new Vector2Int(5, 5))));
+                    _gridManager.GetCell(new Vector2Int(5, 5))));
             }
         }
 

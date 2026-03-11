@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Scripts.AI.Entities.Pawn;
@@ -23,4 +24,9 @@ public class PawnRegistry
     
     public PawnController GetAvailablePawn() =>
         _pawns.FirstOrDefault(p => p.Model.CurrentRole == PawnRoleType.None);
+
+    public IReadOnlyList<PawnController> GetAllPawns() => _pawns;
+    
+    public IEnumerable<PawnController> GetPawnsByCondition(Func<PawnController, bool> predicate) => 
+        _pawns.Where(predicate);
 }

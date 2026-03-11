@@ -15,8 +15,8 @@ public class ResourceRowUI : MonoBehaviour
         resourceAmount.text = stock.Amount.ToString();
     }
     
-    public void UpdateAmount(int amount)
+    public void UpdateAmount(float amount)
     {
-        resourceAmount.text = amount.ToString();
+        resourceAmount.text = Mathf.FloorToInt(amount).ToString();
     }
 }

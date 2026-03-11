@@ -21,7 +21,7 @@ namespace _Scripts.BuildSystem.Building
             _pawnRegistry = pawnRegistry;
 
             buildingNameTMP.text = _controller.Model.BuildingSO.BuildingName;
-            workerNumberTMP.text = "0";
+            SetWorkerNumberTMP();
         }
 
         public void AddWorker()
@@ -30,13 +30,19 @@ namespace _Scripts.BuildSystem.Building
 
             var pawn = _pawnRegistry.GetAvailablePawn();
             _controller.AssignWorker(pawn);
-            workerNumberTMP.text = _controller.Model.PawnWorkers.Count.ToString();
+            SetWorkerNumberTMP();
         }
 
         public void RemoveWorker()
         {
             _controller.RemoveWorker();
-            workerNumberTMP.text = _controller.Model.PawnWorkers.Count.ToString();
+            SetWorkerNumberTMP();
+        }
+
+        private void SetWorkerNumberTMP()
+        {
+            workerNumberTMP.text = _controller.Model.PawnWorkers.Count.ToString() + "/"
+                + _controller.Model.BuildingSO.MaxWorkers.ToString();
         }
     }
 }

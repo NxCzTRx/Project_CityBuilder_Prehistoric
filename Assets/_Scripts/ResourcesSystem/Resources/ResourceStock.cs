@@ -6,6 +6,12 @@ namespace _Scripts.ResourcesSystem.Resources
     public class ResourceStock
     {
         public ResourceTypeSO ResourceTypeSO;
-        public int Amount;
+        public float Amount;
+        
+        public ResourceStock(ResourceTypeSO resourceTypeSo, float amount)
+        {
+            ResourceTypeSO = resourceTypeSo;
+            Amount = amount;
+        }
     }
 }

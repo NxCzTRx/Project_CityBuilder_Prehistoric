@@ -1,4 +1,5 @@
 using _Scripts.Core;
+using _Scripts.Grid;
 using UnityEngine;
 
 namespace _Scripts.BuildSystem.Building
@@ -8,12 +9,12 @@ namespace _Scripts.BuildSystem.Building
     {
         private BuildingController _buildingController;
 
-        public void Init(BuildingSO buildingSO, ObjectResolver objectResolver)
+        public void Init(BuildingSO buildingSO, Cell workCell,ObjectResolver objectResolver)
         {
-            var model = new BuildingModel(buildingSO);
+            var model = new BuildingModel(buildingSO, workCell);
             var view = GetComponent<BuildingView>();
 
-            _buildingController = new BuildingController(model, view, objectResolver.Resolve<PawnRegistry>());
+            _buildingController = new BuildingController(model, view, objectResolver);
         }
     }
 }

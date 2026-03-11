@@ -1,3 +1,4 @@
+
 using _Scripts.BuildSystem.Building;
 using _Scripts.Core;
 using _Scripts.Grid;
@@ -18,6 +19,10 @@ namespace _Scripts.BuildSystem
     
         public void Build(Vector2Int gridOrigin, Vector2 worldCenter, BuildingSO buildingSO)
         {
+            Cell workCell = null;
+            
+            int midX = buildingSO.BuildingWidth / 2;
+
             for (int x = 0; x < buildingSO.BuildingWidth; x++)
             {
                 for (int y = 0; y < buildingSO.BuildingHeight; y++)
@@ -25,11 +30,17 @@ namespace _Scripts.BuildSystem
                     var cell = _gridManager.GetCell(gridOrigin + new Vector2Int(x, y));
                     cell.IsOccupied = true;
                     cell.IsWalkable = false;
+
+                    if (x == midX && y == 0) 
+                    {
+                        cell.IsWalkable = true;
+                        workCell = cell;
+                    }
                 }
             }
         
             var building = Instantiate(buildingSO.BuildingPrefab, worldCenter, Quaternion.identity);
-            building.GetComponent<BuildingEntity>().Init(buildingSO, _objectResolver);
+            building.GetComponent<BuildingEntity>().Init(buildingSO, workCell, _objectResolver);
         }
     }
 }

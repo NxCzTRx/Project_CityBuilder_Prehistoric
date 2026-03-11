@@ -1,7 +1,9 @@
 using System;
 using _Scripts.AI.Entities.Pawn;
+using _Scripts.AI.Entities.Pawn.Scheduling;
 using _Scripts.BuildSystem;
 using _Scripts.Camera;
+using _Scripts.Core.DayCycle;
 using _Scripts.Core.GameMode;
 using _Scripts.Core.UpdateManagement;
 using _Scripts.Core.GameMode.Modes;
@@ -20,6 +22,8 @@ namespace _Scripts.Core
         private readonly ObjectResolver _objectResolver = new();
         
         private GridManager _gridManager;
+        private GameCycleManager _gameCycleManager;
+        private PawnScheduler _pawnScheduler;
         private GameModeManager _gameModeManager;
         private GameResourcesManager _gameResourcesManager;
         private PawnRegistry _pawnRegistry;
@@ -46,16 +50,22 @@ namespace _Scripts.Core
             var pawnSpawner = Instantiate(pawnSpawnerPrefab);
             
             _gridManager = new GridManager(20, 20, 1f);
+            _gameCycleManager = new GameCycleManager();
             _gameModeManager = new GameModeManager(new DefaultGameMode(inputManager));
             _gameResourcesManager = new GameResourcesManager(initialResources);
             _pawnRegistry = new PawnRegistry();
+            _pawnScheduler = new PawnScheduler(_gameCycleManager, _pawnRegistry);
             
             _objectResolver.RegisterInstance(buildManager);
             _objectResolver.RegisterInstance(_gridManager);
+            _objectResolver.RegisterInstance(_gameCycleManager);
             _objectResolver.RegisterInstance(inputManager);
             _objectResolver.RegisterInstance(_gameResourcesManager);
             _objectResolver.RegisterInstance(_pawnRegistry);
+            _objectResolver.RegisterInstance(_pawnScheduler);
+            _objectResolver.RegisterInstance(pawnSpawner);
         
+            _gameCycleManager.Init();
             selectableController.Init(_objectResolver);
             buildManager.Init(_objectResolver);
             cameraController.Init(_objectResolver);

@@ -1,4 +1,6 @@
+using System.ComponentModel;
 using _Scripts.ResourcesSystem.Resources;
+using _Scripts.ResourcesSystem.Resources.ResourceTypes;
 using UnityEngine;
 
 namespace _Scripts.BuildSystem
@@ -23,5 +25,15 @@ namespace _Scripts.BuildSystem
 
         public int MaxWorkers => maxWorkers;
         [SerializeField] private int maxWorkers;
+        
+        public float ProductionPerSecond => productionPerSecond;
+        [SerializeField] private float productionPerSecond;
+
+        public ResourceTypeSO ResourceProduction => resourceProduction;
+        [SerializeField] private ResourceTypeSO resourceProduction;
+        
+        public int WorkCellFromGridOrigin => workCellFromGridOrigin;
+        [Tooltip("Must be below width")]
+        [SerializeField] private int workCellFromGridOrigin;
     }
 }
