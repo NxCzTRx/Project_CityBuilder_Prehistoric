@@ -41,7 +41,8 @@ namespace _Scripts.Grid
 
         public Cell GetCell(Vector2Int position) =>
             !IsValidPosition(position) ? null : _grid[position.x, position.y];
-    
+
+        
         #region Debug
 
         private void OnDrawGizmos()

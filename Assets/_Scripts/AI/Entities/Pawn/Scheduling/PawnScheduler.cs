@@ -21,7 +21,17 @@ namespace _Scripts.AI.Entities.Pawn.Scheduling
 
         public void EvaluatePawn(PawnController pawn)
         {
-            HandleHourChange(_gameCycleManager.GetTime().Hour, new[] { pawn });
+            var hour = _gameCycleManager.GetTime().Hour;
+    
+            bool isWorkTime = (hour >= 8 && hour < 14) || (hour >= 18 && hour < 22);
+            bool isSleepTime = hour >= 22 || hour < 6;
+
+            if (isWorkTime && pawn.Model.WorkPlaceController != null)
+                pawn.ChangeState(new PawnMoveToWorkState(pawn, pawn.Model.WorkPlaceController.Model.WorkCell));
+            else if (isSleepTime && pawn.Model.HouseController != null)
+                pawn.ChangeState(new PawnMoveToHouse(pawn, pawn.Model.HouseController.Model.EntranceCell));
+            else
+                pawn.ChangeState(new PawnIdleState(pawn));
         }
 
         private void HandleHourChange(int hour)
@@ -35,8 +45,8 @@ namespace _Scripts.AI.Entities.Pawn.Scheduling
             {
                 case 8:
                 case 18:
-                    foreach (var pawn in pawns.Where(p => p.Model.BuildingController != null))
-                        pawn.ChangeState(new PawnMoveToWorkState(pawn, pawn.Model.BuildingController.Model.WorkCell));
+                    foreach (var pawn in pawns.Where(p => p.Model.WorkPlaceController != null))
+                        pawn.ChangeState(new PawnMoveToWorkState(pawn, pawn.Model.WorkPlaceController.Model.WorkCell));
                     break;
 
                 case 6:
@@ -44,6 +54,10 @@ namespace _Scripts.AI.Entities.Pawn.Scheduling
                 case 21:
                     foreach (var pawn in pawns)
                         pawn.ChangeState(new PawnIdleState(pawn));
+                    break;
+                case 22:
+                    foreach (var pawn in pawns.Where(p => p.Model.HouseController != null))
+                        pawn.ChangeState(new PawnMoveToHouse(pawn, pawn.Model.HouseController.Model.EntranceCell));
                     break;
             }
         }

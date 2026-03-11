@@ -1,38 +1,41 @@
 using _Scripts.AI.Entities.Pawn;
-using _Scripts.AI.FSM.States;
 using _Scripts.BuildSystem.Building;
+using _Scripts.BuildSystem.Building.WorkPlace;
 using _Scripts.ResourcesSystem;
 using UnityEngine;
 
-public class PawnWorkState : State<PawnController>
+namespace _Scripts.AI.FSM.States
 {
-    private BuildingController _buildingController;
-    private GameResourcesManager _gameResourcesManager;
+    public class PawnWorkState : State<PawnController>
+    {
+        private WorkPlaceController _workPlaceController;
+        private GameResourcesManager _gameResourcesManager;
     
-    public PawnWorkState(
-        PawnController controller, 
-        BuildingController buildingController, 
-        GameResourcesManager gameResourcesManager)
-        : base(controller)
-    {
-        Controller = controller;
-        _buildingController = buildingController;
-        _gameResourcesManager = gameResourcesManager;
-    }
+        public PawnWorkState(
+            PawnController controller, 
+            WorkPlaceController workPlaceController, 
+            GameResourcesManager gameResourcesManager)
+            : base(controller)
+        {
+            Controller = controller;
+            _workPlaceController = workPlaceController;
+            _gameResourcesManager = gameResourcesManager;
+        }
 
-    public override void OnEnter()
-    {
+        public override void OnEnter()
+        {
         
-    }
+        }
 
-    public override void OnUpdate()
-    {
-        var stock = _buildingController.GetProduction(Time.deltaTime);
-        _gameResourcesManager.AddResources(stock);
-    }
+        public override void OnUpdate()
+        {
+            var stock = _workPlaceController.GetProduction(Time.deltaTime);
+            _gameResourcesManager.AddResources(stock);
+        }
 
-    public override void OnExit()
-    {
+        public override void OnExit()
+        {
 
+        }
     }
 }

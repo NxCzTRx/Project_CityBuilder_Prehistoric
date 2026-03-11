@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: -8723266809948612039}
   - component: {fileID: 114572683965230009}
   m_Layer: 0
-  m_Name: BuildingTest
+  m_Name: WorkplaceTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ec50b193eb2a24409424b3307269b1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingView
-  buildingHUD: {fileID: 7118067644355192128}
+  workPlaceHUD: {fileID: 7118067644355192128}
 --- !u!61 &114572683965230009
 BoxCollider2D:
   m_ObjectHideFlags: 0

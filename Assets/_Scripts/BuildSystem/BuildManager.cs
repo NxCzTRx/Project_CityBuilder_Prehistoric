@@ -12,7 +12,7 @@ namespace _Scripts.BuildSystem
         [SerializeField] private GhostBuilding ghostBuilding;
         [SerializeField] private BuildController buildController;
         
-        [SerializeField] private BuildingSO selectedBuildingData; //Take off serialize, test purpose only
+        public BuildingSO SelectedBuildingData; //Take off public, test purpose only
         
         private (Vector2Int gridOrigin, Vector2 worldCenter) _currentPlacement = new(Vector2Int.zero, Vector2.zero);
         
@@ -54,13 +54,13 @@ namespace _Scripts.BuildSystem
         
         private void HandleBuildRequest()
         {
-            if (!_placementController.IsValidPlacement(_currentPlacement.gridOrigin, selectedBuildingData) ||
-                !_gameResourcesManager.CanAfford(selectedBuildingData.BuildingCost))
+            if (!_placementController.IsValidPlacement(_currentPlacement.gridOrigin, SelectedBuildingData) ||
+                !_gameResourcesManager.CanAfford(SelectedBuildingData.BuildingCost))
                 return;
             
-            _gameResourcesManager.RemoveResources(selectedBuildingData.BuildingCost);
+            _gameResourcesManager.RemoveResources(SelectedBuildingData.BuildingCost);
             buildController.Build(
-                _currentPlacement.gridOrigin, _currentPlacement.worldCenter, selectedBuildingData);
+                _currentPlacement.gridOrigin, _currentPlacement.worldCenter, SelectedBuildingData);
         }
 
         private void HandleBuildingPlacement(Vector2 mousePosition)
@@ -73,11 +73,11 @@ namespace _Scripts.BuildSystem
             if (centerCell == null) return;
         
             _currentPlacement = _placementController.GetBuildingPlacement(
-                centerCell, selectedBuildingData);
+                centerCell, SelectedBuildingData);
 
             ghostBuilding.MoveGhost(_currentPlacement.worldCenter);
             ghostBuilding.SetValidPlacementColor(
-                _placementController.IsValidPlacement(_currentPlacement.gridOrigin, selectedBuildingData));
+                _placementController.IsValidPlacement(_currentPlacement.gridOrigin, SelectedBuildingData));
         }
         
         public void SetBuildManagerActive(bool isActive)

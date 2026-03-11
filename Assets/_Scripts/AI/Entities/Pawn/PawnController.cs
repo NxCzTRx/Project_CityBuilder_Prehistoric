@@ -1,3 +1,4 @@
+using System;
 using _Scripts.AI.FSM;
 using _Scripts.AI.FSM.States;
 using _Scripts.Core;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace _Scripts.AI.Entities.Pawn
 {
-    public class PawnController : FSMController<PawnController>
+    public class PawnController : FSMController<PawnController>, IDisposable
     {
         private PawnEntity _entity;
         public PawnModel Model { get; }
@@ -28,9 +29,6 @@ namespace _Scripts.AI.Entities.Pawn
             Resolver = resolver;
             
             View.Init(model); 
-            
-            //ASSIGN MAIN BASE (HOUSE)
-
             Model.OnDie += Die;
         }
 
@@ -52,6 +50,11 @@ namespace _Scripts.AI.Entities.Pawn
         private void Die()
         {
             MySpawner.Despawn(_entity);
+        }
+
+        public void Dispose()
+        {
+            Model.OnDie -= Die;
         }
     }
 }

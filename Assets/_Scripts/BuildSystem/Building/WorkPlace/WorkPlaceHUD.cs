@@ -1,26 +1,28 @@
+using _Scripts.AI.Entities.Pawn;
 using _Scripts.AI.Entities.Pawn.Roles;
+using _Scripts.BuildSystem.Building.WorkPlace;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace _Scripts.BuildSystem.Building
 {
-    public class BuildingHUD : MonoBehaviour
+    public class WorkPlaceHUD : MonoBehaviour
     {
         [SerializeField] private TMP_Text buildingNameTMP;
         [SerializeField] private Button addWorkerButton;
         [SerializeField] private Button removeWorkerButton;
         [SerializeField] private TMP_Text workerNumberTMP;
         
-        private BuildingController _controller;
+        private WorkPlaceController _controller;
         private PawnRegistry _pawnRegistry;
 
-        public void Init(BuildingController controller, PawnRegistry pawnRegistry)
+        public void Init(WorkPlaceController controller, PawnRegistry pawnRegistry)
         {
             _controller = controller;
             _pawnRegistry = pawnRegistry;
 
-            buildingNameTMP.text = _controller.Model.BuildingSO.BuildingName;
+            buildingNameTMP.text = _controller.Model.WorkPlaceSO.BuildingName;
             SetWorkerNumberTMP();
         }
 
@@ -42,7 +44,7 @@ namespace _Scripts.BuildSystem.Building
         private void SetWorkerNumberTMP()
         {
             workerNumberTMP.text = _controller.Model.PawnWorkers.Count.ToString() + "/"
-                + _controller.Model.BuildingSO.MaxWorkers.ToString();
+                + _controller.Model.WorkPlaceSO.MaxWorkers.ToString();
         }
     }
 }

@@ -1,5 +1,6 @@
 
 using _Scripts.BuildSystem.Building;
+using _Scripts.BuildSystem.Building.Housing;
 using _Scripts.Core;
 using _Scripts.Grid;
 using UnityEngine;
@@ -19,7 +20,7 @@ namespace _Scripts.BuildSystem
     
         public void Build(Vector2Int gridOrigin, Vector2 worldCenter, BuildingSO buildingSO)
         {
-            Cell workCell = null;
+            Cell entranceCell = null;
             
             int midX = buildingSO.BuildingWidth / 2;
 
@@ -34,13 +35,21 @@ namespace _Scripts.BuildSystem
                     if (x == midX && y == 0) 
                     {
                         cell.IsWalkable = true;
-                        workCell = cell;
+                        entranceCell = cell;
                     }
                 }
             }
         
             var building = Instantiate(buildingSO.BuildingPrefab, worldCenter, Quaternion.identity);
-            building.GetComponent<BuildingEntity>().Init(buildingSO, workCell, _objectResolver);
+
+            if (buildingSO is WorkPlaceSO workPlaceSo)
+            {
+                building.GetComponent<WorkPlaceEntity>().Init(workPlaceSo, entranceCell, _objectResolver);   
+            }
+            else if (buildingSO is HouseSO houseSo)
+            {
+                building.GetComponent<HouseEntity>().Init(houseSo, entranceCell, _objectResolver);
+            }
         }
     }
 }

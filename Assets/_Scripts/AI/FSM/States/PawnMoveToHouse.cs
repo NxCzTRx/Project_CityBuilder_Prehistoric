@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using _Scripts.AI.Entities.Pawn;
@@ -6,16 +5,17 @@ using _Scripts.AI.FSM.States;
 using _Scripts.AI.Pathfinding;
 using _Scripts.Grid;
 using _Scripts.ResourcesSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class PawnMoveToWorkState : State<PawnController>
+public class PawnMoveToHouse : State<PawnController>
 {
     private Cell _targetCell;
     private Queue<Vector3> _path;
     
     private GridManager _gridManager;
         
-    public PawnMoveToWorkState(PawnController controller, Cell targetCell) : base(controller)
+    public PawnMoveToHouse(PawnController controller, Cell targetCell) : base(controller)
     {
         Controller = controller;
         _targetCell = targetCell;
@@ -37,13 +37,7 @@ public class PawnMoveToWorkState : State<PawnController>
 
     public override void OnUpdate()
     {
-        if (Controller.Model.CurrentCell == _targetCell)
-        {
-            Controller.ChangeState(new PawnWorkState(Controller, 
-                Controller.Model.WorkPlaceController,
-                Controller.Resolver.Resolve<GameResourcesManager>()));
-            return;
-        }
+        if (Controller.Model.CurrentCell == _targetCell) return;
 
         if (_path.Count == 0) return;
 

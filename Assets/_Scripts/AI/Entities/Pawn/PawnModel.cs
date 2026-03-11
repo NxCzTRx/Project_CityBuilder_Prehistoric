@@ -1,6 +1,8 @@
 using System;
 using _Scripts.AI.Entities.Pawn.Roles;
 using _Scripts.BuildSystem.Building;
+using _Scripts.BuildSystem.Building.Housing;
+using _Scripts.BuildSystem.Building.WorkPlace;
 using _Scripts.Grid;
 using _Scripts.ResourcesSystem;
 using UnityEngine;
@@ -12,7 +14,8 @@ namespace _Scripts.AI.Entities.Pawn
     {
         public PawnRoleType CurrentRole { get; set; } = PawnRoleType.None;
         public Cell CurrentCell;
-        public BuildingController BuildingController {get; set;}
+        public WorkPlaceController WorkPlaceController {get; set;}
+        public HouseController HouseController {get; set;}
         
         public Action<float> OnHealthChanged;
         public Action<float> OnHungerChanged;

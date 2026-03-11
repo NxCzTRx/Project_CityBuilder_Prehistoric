@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e984269e54809164f873716dc812245a, type: 3}
+  m_Name: BasicHouseSO
+  m_EditorClassIdentifier: Assembly-CSharp::HouseSO
+  buildingName: House
+  buildingWidth: 2
+  buildingHeight: 2
+  buildingPrefab: {fileID: 3471649582723213855, guid: 85ac5fb591758f2409dcd9893b5a17c8, type: 3}
+  buildingCost:
+  - ResourceTypeSO: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}
+    Amount: 10
+  entranceCellFromGridOrigin: 0
+  maxResidents: 2

@@ -5,17 +5,17 @@ using _Scripts.AI.FSM.States;
 using _Scripts.Core;
 using _Scripts.ResourcesSystem.Resources;
 
-namespace _Scripts.BuildSystem.Building
+namespace _Scripts.BuildSystem.Building.WorkPlace
 {
-    public class BuildingController
+    public class WorkPlaceController
     {
-        public BuildingModel Model { get; }
-        public BuildingView View { get; }
+        public WorkPlaceModel Model { get; }
+        public WorkPlaceView View { get; }
         
         private readonly ObjectResolver _objectResolver;
         private readonly PawnScheduler _pawnScheduler;
 
-        public BuildingController(BuildingModel model, BuildingView view, ObjectResolver objectResolver)
+        public WorkPlaceController(WorkPlaceModel model, WorkPlaceView view, ObjectResolver objectResolver)
         {
             _objectResolver = objectResolver;
             _pawnScheduler = _objectResolver.Resolve<PawnScheduler>();
@@ -26,14 +26,14 @@ namespace _Scripts.BuildSystem.Building
             View.Init(this, _objectResolver.Resolve<PawnRegistry>());
         }
 
-        public bool HasSpace => Model.PawnWorkers.Count < Model.BuildingSO.MaxWorkers;
+        public bool HasSpace => Model.PawnWorkers.Count < Model.WorkPlaceSO.MaxWorkers;
 
         public void AssignWorker(PawnController pawnController)
         {
             if (!HasSpace) return;
             Model.PawnWorkers.Push(pawnController);
             pawnController.Model.CurrentRole = PawnRoleType.Employee;
-            pawnController.Model.BuildingController = this;
+            pawnController.Model.WorkPlaceController = this;
             _pawnScheduler.EvaluatePawn(pawnController);
         }
 
@@ -44,13 +44,13 @@ namespace _Scripts.BuildSystem.Building
             pawn.ChangeState(new PawnIdleState(pawn));
             
             pawn.Model.CurrentRole = PawnRoleType.None;
-            pawn.Model.BuildingController = null;
+            pawn.Model.WorkPlaceController = null;
         }
 
         public ResourceStock GetProduction(float deltaSecondsProducing)
         {
-            return new ResourceStock(Model.BuildingSO.ResourceProduction, 
-                Model.BuildingSO.ProductionPerSecond * deltaSecondsProducing);
+            return new ResourceStock(Model.WorkPlaceSO.ResourceProduction, 
+                Model.WorkPlaceSO.ProductionPerSecond * deltaSecondsProducing);
         }
     }
 }

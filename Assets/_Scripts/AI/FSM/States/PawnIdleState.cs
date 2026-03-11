@@ -28,13 +28,13 @@ namespace _Scripts.AI.FSM.States
         public override void OnUpdate()
         {
             //TEST
-            _idleTime += UnityEngine.Time.deltaTime;
+            _idleTime += Time.deltaTime;
             
             if (_idleTime > 2f)
             {
                 // After idling for 2 seconds, move to a random position
                 Controller.ChangeState(new PawnMoveTo(Controller,
-                    _gridManager.GetCell(new Vector2Int(5, 5))));
+                    _gridManager.GetCell(new Vector2Int(Random.Range(0, 20), Random.Range(0, 20)))));
             }
         }
 

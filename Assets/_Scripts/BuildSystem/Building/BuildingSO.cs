@@ -5,8 +5,7 @@ using UnityEngine;
 
 namespace _Scripts.BuildSystem
 {
-    [CreateAssetMenu(fileName = "BuildingSO", menuName = "Scriptable Objects/BuildingSO")]
-    public class BuildingSO : ScriptableObject
+    public abstract class BuildingSO : ScriptableObject
     {
         public string BuildingName => buildingName;
         [SerializeField] private string buildingName;
@@ -22,18 +21,9 @@ namespace _Scripts.BuildSystem
     
         public ResourceStock[] BuildingCost => buildingCost;
         [SerializeField] private ResourceStock[] buildingCost;
-
-        public int MaxWorkers => maxWorkers;
-        [SerializeField] private int maxWorkers;
         
-        public float ProductionPerSecond => productionPerSecond;
-        [SerializeField] private float productionPerSecond;
-
-        public ResourceTypeSO ResourceProduction => resourceProduction;
-        [SerializeField] private ResourceTypeSO resourceProduction;
-        
-        public int WorkCellFromGridOrigin => workCellFromGridOrigin;
+        public int EntranceCellFromGridOrigin => entranceCellFromGridOrigin;
         [Tooltip("Must be below width")]
-        [SerializeField] private int workCellFromGridOrigin;
+        [SerializeField] private int entranceCellFromGridOrigin;
     }
 }

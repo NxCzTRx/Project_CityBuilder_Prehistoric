@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 using _Scripts.AI.Entities.Pawn;
 using _Scripts.AI.Entities.Pawn.Scheduling;
 using _Scripts.BuildSystem;
+using _Scripts.BuildSystem.Building.Housing;
 using _Scripts.Camera;
 using _Scripts.Core.DayCycle;
 using _Scripts.Core.GameMode;
@@ -27,6 +29,9 @@ namespace _Scripts.Core
         private GameModeManager _gameModeManager;
         private GameResourcesManager _gameResourcesManager;
         private PawnRegistry _pawnRegistry;
+        private HousingRegistry _housingRegistry;
+        
+        private PawnSpawner _pawnSpawner; //TEST
         
         [SerializeField] ResourceStock[] initialResources;
 
@@ -54,6 +59,7 @@ namespace _Scripts.Core
             _gameModeManager = new GameModeManager(new DefaultGameMode(inputManager));
             _gameResourcesManager = new GameResourcesManager(initialResources);
             _pawnRegistry = new PawnRegistry();
+            _housingRegistry = new HousingRegistry();
             _pawnScheduler = new PawnScheduler(_gameCycleManager, _pawnRegistry);
             
             _objectResolver.RegisterInstance(buildManager);
@@ -62,6 +68,7 @@ namespace _Scripts.Core
             _objectResolver.RegisterInstance(inputManager);
             _objectResolver.RegisterInstance(_gameResourcesManager);
             _objectResolver.RegisterInstance(_pawnRegistry);
+            _objectResolver.RegisterInstance(_housingRegistry);
             _objectResolver.RegisterInstance(_pawnScheduler);
             _objectResolver.RegisterInstance(pawnSpawner);
         
@@ -70,8 +77,8 @@ namespace _Scripts.Core
             buildManager.Init(_objectResolver);
             cameraController.Init(_objectResolver);
             pawnSpawner.Init(_objectResolver);
-            
-            pawnSpawner.Spawn(Vector2.zero); //Test
+
+            _pawnSpawner = pawnSpawner; //TEST
             
             playerResourcesUI.Init(_gameResourcesManager);
         }
@@ -83,14 +90,20 @@ namespace _Scripts.Core
         }
         
         //Test methods, will be triggered by UI button for now
-        public void ChangeGameModeToBuild()
+        public void ChangeGameModeToBuild(BuildingSO buildingSo)
         {
             _gameModeManager.ChangeGameMode(new BuildGameMode(inputManager, buildManager));
+            buildManager.SelectedBuildingData = buildingSo;
         }
         
         public void ChangeGameModeToDefault()
         {
             _gameModeManager.ChangeGameMode(new DefaultGameMode(inputManager));
+        }
+        
+        public void SpawnPawn() //TEST
+        {
+            _pawnSpawner.Spawn(Vector2.zero);
         }
         //
 
