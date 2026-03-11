@@ -21,6 +21,8 @@ namespace _Scripts.AI.Entities.Pawn.Scheduling
 
         public void EvaluatePawn(PawnController pawn)
         {
+            if (pawn.Model.IsHandlingUrgentState) return;
+            
             var hour = _gameCycleManager.GetTime().Hour;
     
             bool isWorkTime = (hour >= 8 && hour < 14) || (hour >= 18 && hour < 22);
@@ -45,7 +47,8 @@ namespace _Scripts.AI.Entities.Pawn.Scheduling
             {
                 case 8:
                 case 18:
-                    foreach (var pawn in pawns.Where(p => p.Model.WorkPlaceController != null))
+                    foreach (var pawn in pawns.Where(p =>
+                                 p.Model.WorkPlaceController != null && !p.Model.IsHandlingUrgentState))
                         pawn.ChangeState(new PawnMoveToWorkState(pawn, pawn.Model.WorkPlaceController.Model.WorkCell));
                     break;
 
@@ -56,7 +59,8 @@ namespace _Scripts.AI.Entities.Pawn.Scheduling
                         pawn.ChangeState(new PawnIdleState(pawn));
                     break;
                 case 22:
-                    foreach (var pawn in pawns.Where(p => p.Model.HouseController != null))
+                    foreach (var pawn in pawns.Where(p =>
+                                 p.Model.HouseController != null && !p.Model.IsHandlingUrgentState))
                         pawn.ChangeState(new PawnMoveToHouse(pawn, pawn.Model.HouseController.Model.EntranceCell));
                     break;
             }

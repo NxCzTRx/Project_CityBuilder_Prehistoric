@@ -6,6 +6,7 @@ using _Scripts.BuildSystem;
 using _Scripts.Core;
 using _Scripts.Core.UpdateManagement;
 using _Scripts.Grid;
+using _Scripts.ResourcesSystem.Resources.ResourceTypes;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace _Scripts.AI.Entities.Pawn
 {
     public class PawnEntity : MonoBehaviour, IUpdateObserver
     {
+        [SerializeField] private ResourceTypeSO food;
+        
         private GridManager _gridManager; 
         
         public PawnController PawnController { get; private set; }
@@ -21,7 +24,7 @@ namespace _Scripts.AI.Entities.Pawn
         {
             _gridManager = objectResolver.Resolve<GridManager>();
             
-            var model = new PawnModel(objectResolver.Resolve<GridManager>(), transform.position);
+            var model = new PawnModel(objectResolver.Resolve<GridManager>(), transform.position, food);
             var view = GetComponent<PawnView>();
 
             PawnController = new PawnController(model, view, this, mySpawner, objectResolver);

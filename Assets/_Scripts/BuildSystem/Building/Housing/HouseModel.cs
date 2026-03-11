@@ -7,7 +7,7 @@ namespace _Scripts.BuildSystem.Building.Housing
     public class HouseModel
     {
         public HouseSO HouseSO { get; }
-        public Stack<PawnController> PawnResidents { get; } 
+        public List<PawnController> PawnResidents { get; } 
     
         public Cell EntranceCell;
 
@@ -15,7 +15,7 @@ namespace _Scripts.BuildSystem.Building.Housing
         public HouseModel(HouseSO houseSO, Cell entranceCell)
         {
             HouseSO = houseSO;
-            PawnResidents = new Stack<PawnController>(HouseSO.MaxResidents);
+            PawnResidents = new List<PawnController>(HouseSO.MaxResidents);
             
             EntranceCell = entranceCell;
         }

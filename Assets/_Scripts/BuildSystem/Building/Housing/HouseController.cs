@@ -19,14 +19,14 @@ namespace _Scripts.BuildSystem.Building.Housing
         public void AssignResident(PawnController pawn)
         {
             if (!HasSpace) return;
-            Model.PawnResidents.Push(pawn);
+            Model.PawnResidents.Add(pawn);
             pawn.Model.HouseController = this;
         }
 
-        public void RemoveResident()
+        public void RemoveResident(PawnController pawn)
         {
             if (Model.PawnResidents.Count == 0) return;
-            var pawn = Model.PawnResidents.Pop();
+            Model.PawnResidents.Remove(pawn);
             pawn.Model.HouseController = null;
         }
     }

@@ -485,6 +485,8 @@ MonoBehaviour:
     Amount: 0
   - ResourceTypeSO: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
     Amount: 0
+  - ResourceTypeSO: {fileID: 11400000, guid: 8ca8c0d74e68d7e429b2c96d85d6ceed, type: 2}
+    Amount: 25
   selectableController: {fileID: 1187278174}
   buildManager: {fileID: 1577030344}
   inputManager: {fileID: 1797176608}

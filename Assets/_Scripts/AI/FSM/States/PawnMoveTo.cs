@@ -28,10 +28,16 @@ namespace _Scripts.AI.FSM.States
                 Controller.Model.CurrentCell,
                 _targetCell, 
                 _gridManager);
-            
-                _path = new Queue<Vector3>(
-                    gridPositions.Select(p => GridUtils.CellToWorldPosition(
-                        p, _gridManager.CellSize)));
+
+            if (gridPositions == null)
+            {
+                _path = new Queue<Vector3>();
+                return;
+            }
+
+            _path = new Queue<Vector3>(
+                gridPositions.Select(p => GridUtils.CellToWorldPosition(
+                    p, _gridManager.CellSize)));
         }
 
         public override void OnUpdate()

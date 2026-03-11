@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: KnowledgePointsSO
   m_EditorClassIdentifier: Assembly-CSharp::ResourceSO
   ResourceName: Knowledge
-  ResourceIcon: {fileID: 0}
+  ResourceIcon: {fileID: 5595747086137543514, guid: 760f5ee0fc9f96949b75e1628ead672e, type: 3}

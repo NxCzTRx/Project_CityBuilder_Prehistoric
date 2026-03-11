@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StoneSO
   m_EditorClassIdentifier: Assembly-CSharp::MaterialSO
   ResourceName: Stone
-  ResourceIcon: {fileID: 0}
+  ResourceIcon: {fileID: 8914885805584822163, guid: f85673c074dc0bd4192c3bb96a5709f8, type: 3}

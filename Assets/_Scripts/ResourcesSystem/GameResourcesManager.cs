@@ -26,7 +26,7 @@ namespace _Scripts.ResourcesSystem
         }
 
 
-        private float GetAmount(ResourceTypeSO resource)
+        public float GetAmount(ResourceTypeSO resource)
         {
             if (_resourcesAmount.TryGetValue(resource, out var amount))
                 return amount;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1512830274540898288}
   - component: {fileID: 1542087805484070369}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,9 +79,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: -2031844532821614850, guid: 949a8e14c89d764448796d532731a675, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -421,6 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d03dc34b6d7ef04cb1d8392eb9c1ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.AI.Entities.Pawn.PawnEntity
+  food: {fileID: 11400000, guid: 8ca8c0d74e68d7e429b2c96d85d6ceed, type: 2}
 --- !u!114 &5279173099555924177
 MonoBehaviour:
   m_ObjectHideFlags: 0

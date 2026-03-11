@@ -1,8 +1,12 @@
 using System;
+using _Scripts.AI.Entities.Pawn.Scheduling;
 using _Scripts.AI.FSM;
 using _Scripts.AI.FSM.States;
 using _Scripts.Core;
 using _Scripts.Grid;
+using _Scripts.ResourcesSystem;
+using _Scripts.ResourcesSystem.Resources.ResourceTypes;
+using Mono.Cecil;
 using UnityEngine;
 
 namespace _Scripts.AI.Entities.Pawn
@@ -19,7 +23,7 @@ namespace _Scripts.AI.Entities.Pawn
             PawnModel model, 
             PawnView view, 
             PawnEntity entity ,
-            PawnSpawner spawner, 
+            PawnSpawner spawner,
             ObjectResolver resolver)
         {
             Model = model;
@@ -41,10 +45,19 @@ namespace _Scripts.AI.Entities.Pawn
         
         private void UpdateNeeds()
         {
-            if (Model.Hunger > 0) 
+            if (Model.Hunger > 0)
+            {
                 Model.Hunger -= Model.HungerDecayRate * Time.deltaTime;
+                Model.Health += Model.HealthDecayRate * Time.deltaTime;
+            }
             else
                 Model.Health -= Model.HealthDecayRate * Time.deltaTime;
+
+            if (Model.Hunger < Model.HungerThreshold && !Model.IsHandlingUrgentState)
+            {
+                Model.IsHandlingUrgentState = true;
+                ChangeState(new PawnEatState(this, Model.HouseController.Model.EntranceCell));
+            }
         }
 
         private void Die()
