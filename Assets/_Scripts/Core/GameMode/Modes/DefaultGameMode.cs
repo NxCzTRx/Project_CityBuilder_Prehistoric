@@ -7,17 +7,12 @@ namespace _Scripts.Core.GameMode.Modes
         private GameModeManager _myGameModeManager;
         
         private readonly InputManager _inputManager;
-
-        public DefaultGameMode(InputManager inputManager)
-        {
-            _inputManager = inputManager;
-        }
         
         public void Enter(GameModeManager gameModeManager)
         {
             _myGameModeManager = gameModeManager;
             
-            _inputManager.ChangeCurrentScheme("Default");
+            _myGameModeManager.InputManager.ChangeCurrentScheme("Default");
         }
 
         public void Exit()

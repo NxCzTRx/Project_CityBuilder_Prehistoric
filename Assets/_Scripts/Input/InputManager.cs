@@ -13,6 +13,7 @@ namespace _Scripts.Input
         public event Action<Vector2> OnMouseMove;
         public event Action OnBuild;
         public event Action OnSelect;
+        public event Action OnExitConstructionMode;
         
         
         private void Awake()
@@ -30,6 +31,12 @@ namespace _Scripts.Input
             _playerInput.actions["MoveBuildCamera"].performed += MoveCameraPerformed;
             _playerInput.actions["MoveBuildCamera"].canceled += MoveCameraPerformed;
             _playerInput.actions["Build"].started += BuildPerformed;
+            _playerInput.actions["ExitConstructionMode"].started += ExitConstructionModePerformed;
+        }
+
+        private void ExitConstructionModePerformed(InputAction.CallbackContext obj)
+        {
+            OnExitConstructionMode?.Invoke();
         }
 
         private void BuildPerformed(InputAction.CallbackContext ctx)
@@ -75,6 +82,7 @@ namespace _Scripts.Input
             _playerInput.actions["MoveBuildCamera"].performed -= MoveCameraPerformed;
             _playerInput.actions["MoveBuildCamera"].canceled -= MoveCameraPerformed;
             _playerInput.actions["Build"].started -= BuildPerformed;
+            _playerInput.actions["ExitConstructionMode"].started += ExitConstructionModePerformed;
         }
     }
 }

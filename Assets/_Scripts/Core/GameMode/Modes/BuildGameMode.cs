@@ -6,28 +6,28 @@ namespace _Scripts.Core.GameMode.Modes
 {
     public class BuildGameMode : IGameMode
     {
-        private GameModeManager _myGameModeManager;
+        private BuildingSO _buildingSo;
         
-        private readonly InputManager _inputManager;
-        private readonly BuildManager _buildManager;
+        private GameModeManager _myGameModeManager;
 
-        public BuildGameMode(InputManager inputManager, BuildManager buildManager)
+        public BuildGameMode(BuildingSO buildingSo)
         {
-            _inputManager = inputManager;
-            _buildManager = buildManager;
+            _buildingSo = buildingSo;
         }
 
         public void Enter(GameModeManager gameModeManager)
         {
             _myGameModeManager = gameModeManager;
             
-            _inputManager.ChangeCurrentScheme("Build");
-            _buildManager.SetBuildManagerActive(true);
+            _myGameModeManager.InputManager.ChangeCurrentScheme("Build");
+            _myGameModeManager.BuildManager.EnableBuildManager(_buildingSo);
+            _myGameModeManager.InputManager.OnExitConstructionMode += Exit;
         }
 
         public void Exit()
         {
-            _buildManager.SetBuildManagerActive(false);
+            _myGameModeManager.InputManager.OnExitConstructionMode -= Exit;
+            _myGameModeManager.BuildManager.DisableBuildManager();
         }
     }
 }

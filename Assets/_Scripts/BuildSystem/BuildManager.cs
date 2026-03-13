@@ -12,7 +12,7 @@ namespace _Scripts.BuildSystem
         [SerializeField] private GhostBuilding ghostBuilding;
         [SerializeField] private BuildController buildController;
         
-        public BuildingSO SelectedBuildingData; //Take off public, test purpose only
+        private BuildingSO _selectedBuildingData;
         
         private (Vector2Int gridOrigin, Vector2 worldCenter) _currentPlacement = new(Vector2Int.zero, Vector2.zero);
         
@@ -20,9 +20,8 @@ namespace _Scripts.BuildSystem
         private InputManager _inputManager;
         private GameResourcesManager _gameResourcesManager;
 
-        private bool _isPreviouslyInitialized = false;
         private UnityEngine.Camera _mainCamera;
-        
+
         public void Init(ObjectResolver objectResolver)
         {
             _gridManager = objectResolver.Resolve<GridManager>();
@@ -33,34 +32,17 @@ namespace _Scripts.BuildSystem
             buildController.Init(_gridManager, objectResolver);
 
             _mainCamera = UnityEngine.Camera.main;
-
-            InitializeInput();
-        }
-        
-        private void OnEnable()
-        {
-            if (!_isPreviouslyInitialized)
-                return;
-            
-            InitializeInput();
-        }
-        
-        private void InitializeInput()
-        {
-            _inputManager.OnMouseMove += HandleBuildingPlacement;
-            _inputManager.OnBuild += HandleBuildRequest;
-            _isPreviouslyInitialized = true;
         }
         
         private void HandleBuildRequest()
         {
-            if (!_placementController.IsValidPlacement(_currentPlacement.gridOrigin, SelectedBuildingData) ||
-                !_gameResourcesManager.CanAfford(SelectedBuildingData.BuildingCost))
+            if (!_placementController.IsValidPlacement(_currentPlacement.gridOrigin, _selectedBuildingData) ||
+                !_gameResourcesManager.CanAfford(_selectedBuildingData.BuildingCost))
                 return;
             
-            _gameResourcesManager.RemoveResources(SelectedBuildingData.BuildingCost);
+            _gameResourcesManager.RemoveResources(_selectedBuildingData.BuildingCost);
             buildController.Build(
-                _currentPlacement.gridOrigin, _currentPlacement.worldCenter, SelectedBuildingData);
+                _currentPlacement.gridOrigin, _currentPlacement.worldCenter, _selectedBuildingData);
         }
 
         private void HandleBuildingPlacement(Vector2 mousePosition)
@@ -73,25 +55,28 @@ namespace _Scripts.BuildSystem
             if (centerCell == null) return;
         
             _currentPlacement = _placementController.GetBuildingPlacement(
-                centerCell, SelectedBuildingData);
+                centerCell, _selectedBuildingData);
 
             ghostBuilding.MoveGhost(_currentPlacement.worldCenter);
             ghostBuilding.SetValidPlacementColor(
-                _placementController.IsValidPlacement(_currentPlacement.gridOrigin, SelectedBuildingData));
+                _placementController.IsValidPlacement(_currentPlacement.gridOrigin, _selectedBuildingData));
         }
-        
-        public void SetBuildManagerActive(bool isActive)
+
+        public void EnableBuildManager(BuildingSO buildingSo)
         {
-            if (isActive)
-            {
-                Cursor.visible = false;
-                ghostBuilding.gameObject.SetActive(true);
-            }
-            else
-            {
-                Cursor.visible = true;
-                ghostBuilding.gameObject.SetActive(false);
-            }
+            Cursor.visible = false;
+            ghostBuilding.gameObject.SetActive(true);
+            _selectedBuildingData = buildingSo;
+            _inputManager.OnMouseMove += HandleBuildingPlacement;
+            _inputManager.OnBuild += HandleBuildRequest;
+        }
+
+        public void DisableBuildManager()
+        {
+            Cursor.visible = true;
+            ghostBuilding.gameObject.SetActive(false);
+            _inputManager.OnMouseMove -= HandleBuildingPlacement;
+            _inputManager.OnBuild -= HandleBuildRequest;
         }
     
         private void OnDisable()

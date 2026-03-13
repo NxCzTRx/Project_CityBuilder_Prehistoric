@@ -56,7 +56,7 @@ namespace _Scripts.Core
             
             _gridManager = new GridManager(20, 20, 1f);
             _gameCycleManager = new GameCycleManager();
-            _gameModeManager = new GameModeManager(new DefaultGameMode(inputManager));
+            _gameModeManager = new GameModeManager(new DefaultGameMode(), inputManager, buildManager);
             _gameResourcesManager = new GameResourcesManager(initialResources);
             _pawnRegistry = new PawnRegistry();
             _housingRegistry = new HousingRegistry();
@@ -90,15 +90,10 @@ namespace _Scripts.Core
         }
         
         //Test methods, will be triggered by UI button for now
-        public void ChangeGameModeToBuild(BuildingSO buildingSo)
-        {
-            _gameModeManager.ChangeGameMode(new BuildGameMode(inputManager, buildManager));
-            buildManager.SelectedBuildingData = buildingSo;
-        }
         
         public void ChangeGameModeToDefault()
         {
-            _gameModeManager.ChangeGameMode(new DefaultGameMode(inputManager));
+            _gameModeManager.ChangeGameMode(new DefaultGameMode());
         }
         
         public void SpawnPawn() //TEST
