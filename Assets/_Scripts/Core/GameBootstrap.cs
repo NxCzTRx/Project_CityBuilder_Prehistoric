@@ -13,8 +13,9 @@ using _Scripts.Grid;
 using _Scripts.Input;
 using _Scripts.ResourcesSystem;
 using _Scripts.ResourcesSystem.Resources;
-using _Scripts.ResourcesSystem.UI;
+using _Scripts.UI.Gameplay;
 using UnityEngine;
+using PlayerResourcesUI = _Scripts.UI.Gameplay.PlayerResourcesUI;
 
 namespace _Scripts.Core
 {
@@ -45,7 +46,7 @@ namespace _Scripts.Core
         [SerializeField] private CameraController cameraController;
         
         [Header("UI")]
-        [SerializeField] private PlayerResourcesUI playerResourcesUI;
+        [SerializeField] private GameplayUI gameplayUI;
         
         private void Awake()
         {
@@ -80,7 +81,7 @@ namespace _Scripts.Core
 
             _pawnSpawner = pawnSpawner; //TEST
             
-            playerResourcesUI.Init(_gameResourcesManager);
+            gameplayUI.Init(_gameResourcesManager);
         }
 
         private void Start()
@@ -90,11 +91,6 @@ namespace _Scripts.Core
         }
         
         //Test methods, will be triggered by UI button for now
-        
-        public void ChangeGameModeToDefault()
-        {
-            _gameModeManager.ChangeGameMode(new DefaultGameMode());
-        }
         
         public void SpawnPawn() //TEST
         {

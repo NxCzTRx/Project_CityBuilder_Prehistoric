@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using _Scripts.Events;
 using _Scripts.ResourcesSystem.Resources;
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
 using UnityEngine;
@@ -9,8 +10,6 @@ namespace _Scripts.ResourcesSystem
     public class GameResourcesManager
     {
         private readonly Dictionary<ResourceTypeSO, float> _resourcesAmount = new();
-        
-        public event Action<ResourceTypeSO, float> OnResourceAmountChanged;
 
         public GameResourcesManager(params ResourceStock[] resources)
         {
@@ -57,7 +56,8 @@ namespace _Scripts.ResourcesSystem
                         $"Resource '{resource.ResourceTypeSO.name}' doesn't exist in the manager");
 
                 _resourcesAmount[resource.ResourceTypeSO] += resource.Amount;
-                OnResourceAmountChanged?.Invoke(resource.ResourceTypeSO, _resourcesAmount[resource.ResourceTypeSO]);
+                EventBus<OnResourceAmountChanged>.Publish(new OnResourceAmountChanged(
+                    resource.ResourceTypeSO, _resourcesAmount[resource.ResourceTypeSO]));
             }
         }
 
@@ -78,7 +78,8 @@ namespace _Scripts.ResourcesSystem
             foreach (var resource in resources)
             {
                 _resourcesAmount[resource.ResourceTypeSO] -= resource.Amount;
-                OnResourceAmountChanged?.Invoke(resource.ResourceTypeSO, _resourcesAmount[resource.ResourceTypeSO]);
+                EventBus<OnResourceAmountChanged>.Publish(new OnResourceAmountChanged(
+                    resource.ResourceTypeSO, _resourcesAmount[resource.ResourceTypeSO]));
             }
         }
 

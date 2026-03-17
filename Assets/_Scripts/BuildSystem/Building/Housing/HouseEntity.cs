@@ -13,9 +13,10 @@ namespace _Scripts.BuildSystem.Building.Housing
         {
             var model = new HouseModel(houseSO, entranceCell);
             var view = GetComponent<HouseView>();
+            var housingRegistry = objectResolver.Resolve<HousingRegistry>();
 
-            _controller = new HouseController(model, view);
-            objectResolver.Resolve<HousingRegistry>().RegisterHouse(_controller);
+            _controller = new HouseController(model, view, housingRegistry);
+            housingRegistry.RegisterHouse(_controller);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace _Scripts.AI.Entities.Pawn
                 transform.position, target, speed * Time.deltaTime);
         }
 
-        public bool HasReached(Vector3 target) => (CurrentPosition - target).sqrMagnitude < 0.01f;
+        public bool HasReached(Vector3 target) => (CurrentPosition - target).sqrMagnitude < 0.001f;
         public void Select()
         {
             pawnHud.gameObject.SetActive(true);

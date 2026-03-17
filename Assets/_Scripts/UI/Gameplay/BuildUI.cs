@@ -1,12 +1,8 @@
-using System;
 using _Scripts.BuildSystem;
-using _Scripts.Core.GameMode;
-using _Scripts.Core.GameMode.Modes;
 using _Scripts.Events;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace _Scripts.UI
+namespace _Scripts.UI.Gameplay
 {
     public class BuildUI : MonoBehaviour
     {
