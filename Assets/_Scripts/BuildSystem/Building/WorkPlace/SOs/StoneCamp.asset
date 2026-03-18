@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5ee9d34b5bec6840a3d135d45b97b7b, type: 3}
-  m_Name: WorkPlaceTEST
+  m_Name: StoneCamp
   m_EditorClassIdentifier: Assembly-CSharp::WorkPlaceSO
-  buildingName: TEST WORKPLACE
+  buildingName: Wood Camp
   buildingWidth: 3
   buildingHeight: 2
   buildingPrefab: {fileID: 3471649582723213855, guid: c9383a73d7ea4124bbbdb945cb5f350f, type: 3}
   buildingCost:
   - ResourceTypeSO: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}
-    Amount: 25
+    Amount: 18
   entranceCellFromGridOrigin: 1
   maxWorkers: 2
-  productionPerSecond: 0.1
-  resourceProduction: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}
+  productionPerSecond: 0.025
+  resourceProduction: {fileID: 11400000, guid: 783e8c12f01920542b3a33cab68f3b5b, type: 2}

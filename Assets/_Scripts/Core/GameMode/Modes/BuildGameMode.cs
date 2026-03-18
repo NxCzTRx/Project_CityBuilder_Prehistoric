@@ -21,12 +21,17 @@ namespace _Scripts.Core.GameMode.Modes
             
             _myGameModeManager.InputManager.ChangeCurrentScheme("Build");
             _myGameModeManager.BuildManager.EnableBuildManager(_buildingSo);
-            _myGameModeManager.InputManager.OnExitConstructionMode += Exit;
+            _myGameModeManager.InputManager.OnExitConstructionMode += QuitConstruction;
+        }
+
+        private void QuitConstruction()
+        {
+            _myGameModeManager.ChangeGameMode(new DefaultGameMode());
         }
 
         public void Exit()
         {
-            _myGameModeManager.InputManager.OnExitConstructionMode -= Exit;
+            _myGameModeManager.InputManager.OnExitConstructionMode -= QuitConstruction;
             _myGameModeManager.BuildManager.DisableBuildManager();
         }
     }

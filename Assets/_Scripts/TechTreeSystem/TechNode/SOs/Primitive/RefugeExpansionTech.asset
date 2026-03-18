@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e27e09a4fc3bfc4f991296e9e6ef481, type: 3}
+  m_Name: RefugeExpansionTech
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.TechTreeSystem.TechNode.TechNodeSO
+  nodeName: Refuge Expansion
+  icon: {fileID: 0}
+  techCost: 20
+  knowledgeResourceSo: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}

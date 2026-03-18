@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adbfd6e8467e1984fb661f2e27e8c936, type: 3}
+  m_Name: TribalTechEra
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.TechTreeSystem.TechEra.TechEraSO
+  eraName: Tribal Era
+  techNodes:
+  - {fileID: 11400000, guid: 1a2e5cece6228f44abbf885a3e39096d, type: 2}
+  - {fileID: 11400000, guid: 13f1ca0951527c841a2997851f583167, type: 2}
+  - {fileID: 11400000, guid: 2733da57a09658e4c8cb7d884eef5b99, type: 2}
+  - {fileID: 11400000, guid: 7dc4ffba836bcf348b67c2dcfe980730, type: 2}
+  - {fileID: 11400000, guid: 36f01be19fcc7f0428818e1c601bbeb6, type: 2}

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adbfd6e8467e1984fb661f2e27e8c936, type: 3}
+  m_Name: PrimitiveTechEra
+  m_EditorClassIdentifier: Assembly-CSharp::_Scripts.TechTreeSystem.TechEra.TechEraSO
+  eraName: Primitive Era
+  techNodes:
+  - {fileID: 11400000, guid: 608977d820cf78a4bad33473d1aea1e9, type: 2}
+  - {fileID: 11400000, guid: e38555890498e4a4185b47558d37a0f5, type: 2}
+  - {fileID: 11400000, guid: 0667165849f982f46a0784047364c8ae, type: 2}
+  - {fileID: 11400000, guid: 166a7dd7909f63145826ef3add52a508, type: 2}
+  - {fileID: 11400000, guid: 549a1adea7a9c0e4c8f333293cdb690d, type: 2}
+  - {fileID: 11400000, guid: 63823c74d17c16b4db1fa1dc46538708, type: 2}

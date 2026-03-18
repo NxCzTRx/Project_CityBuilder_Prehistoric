@@ -1,6 +1,8 @@
 using _Scripts.BuildSystem;
 using _Scripts.Core.DayCycle;
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
+using _Scripts.TechTreeSystem.TechEra;
+using _Scripts.TechTreeSystem.TechNode;
 
 namespace _Scripts.Events
 {
@@ -60,5 +62,17 @@ namespace _Scripts.Events
             MaxSpace = maxSpace;
             OccupiedSpace = occupiedSpace;
         }
+    }
+    
+    public struct OnNodeUnlocked : IEvent
+    {
+        public TechNodeSO Node { get; }
+        public OnNodeUnlocked(TechNodeSO node) => Node = node;
+    }
+
+    public struct OnEraCompleted : IEvent
+    {
+        public TechEraSo Era { get; }
+        public OnEraCompleted(TechEraSo era) => Era = era;
     }
 }

@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: -8723266809948612039}
   - component: {fileID: 114572683965230009}
   m_Layer: 0
-  m_Name: WorkplaceTest
+  m_Name: WoodCamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
