@@ -65,8 +65,10 @@ namespace _Scripts.BuildSystem
         public void EnableBuildManager(BuildingSO buildingSo)
         {
             Cursor.visible = false;
-            ghostBuilding.gameObject.SetActive(true);
             _selectedBuildingData = buildingSo;
+            ghostBuilding.gameObject.SetActive(true);
+            ghostBuilding.SetSprite(_selectedBuildingData.BuildingSprite);
+            
             _inputManager.OnMouseMove += HandleBuildingPlacement;
             _inputManager.OnBuild += HandleBuildRequest;
         }
@@ -75,6 +77,7 @@ namespace _Scripts.BuildSystem
         {
             Cursor.visible = true;
             ghostBuilding.gameObject.SetActive(false);
+            
             _inputManager.OnMouseMove -= HandleBuildingPlacement;
             _inputManager.OnBuild -= HandleBuildRequest;
         }

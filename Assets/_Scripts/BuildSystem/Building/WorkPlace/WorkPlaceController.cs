@@ -47,10 +47,10 @@ namespace _Scripts.BuildSystem.Building.WorkPlace
             pawn.Model.WorkPlaceController = null;
         }
 
-        public ResourceStock GetProduction(float deltaSecondsProducing)
+        public ResourceStock GetProduction(float deltaSecondsProducing, float pawnProductionMultiplier)
         {
             return new ResourceStock(Model.WorkPlaceSO.ResourceProduction, 
-                Model.WorkPlaceSO.ProductionPerSecond * deltaSecondsProducing);
+                Model.WorkPlaceSO.ProductionPerSecond * pawnProductionMultiplier * deltaSecondsProducing);
         }
     }
 }

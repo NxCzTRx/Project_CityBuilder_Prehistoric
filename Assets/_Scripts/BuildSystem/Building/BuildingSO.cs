@@ -15,7 +15,10 @@ namespace _Scripts.BuildSystem
     
         public int BuildingHeight => buildingHeight;
         [SerializeField] private int buildingHeight;
-    
+
+        public Sprite BuildingSprite => buildingSprite;
+        [SerializeField] private Sprite buildingSprite;
+        
         public GameObject BuildingPrefab => buildingPrefab;
         [SerializeField] private GameObject buildingPrefab;
     

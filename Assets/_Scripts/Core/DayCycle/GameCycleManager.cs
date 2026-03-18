@@ -7,7 +7,7 @@ namespace _Scripts.Core.DayCycle
 {
     public class GameCycleManager : IUpdateObserver
     {
-        private const float DayDurationInSeconds = 300;
+        private const float DayDurationInSeconds = 600;
 
         private float _currentSeconds = 0;
 

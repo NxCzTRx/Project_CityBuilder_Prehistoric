@@ -23,5 +23,10 @@ namespace _Scripts.BuildSystem
         {
             transform.position = worldPosition;
         }
+
+        public void SetSprite(Sprite sprite)
+        {
+            _spriteRenderer.sprite = sprite;
+        }
     }
 }

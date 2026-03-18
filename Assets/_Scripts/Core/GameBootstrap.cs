@@ -10,6 +10,7 @@ using _Scripts.Core.GameMode;
 using _Scripts.Core.UpdateManagement;
 using _Scripts.Core.GameMode.Modes;
 using _Scripts.Grid;
+using _Scripts.ImmigrationSystem;
 using _Scripts.Input;
 using _Scripts.ResourcesSystem;
 using _Scripts.ResourcesSystem.Resources;
@@ -32,6 +33,7 @@ namespace _Scripts.Core
         private GameModeManager _gameModeManager;
         private GameResourcesManager _gameResourcesManager;
         private TechTreeManager _techTreeManager;
+        private ImmigrationManager _immigrationManager;
         private PawnRegistry _pawnRegistry;
         private HousingRegistry _housingRegistry;
         
@@ -67,6 +69,7 @@ namespace _Scripts.Core
             _pawnRegistry = new PawnRegistry();
             _housingRegistry = new HousingRegistry();
             _pawnScheduler = new PawnScheduler(_gameCycleManager, _pawnRegistry);
+            _immigrationManager = new ImmigrationManager(new Vector2(0,0), _housingRegistry, pawnSpawner);
             
             _objectResolver.RegisterInstance(buildManager);
             _objectResolver.RegisterInstance(_gridManager);
@@ -74,6 +77,7 @@ namespace _Scripts.Core
             _objectResolver.RegisterInstance(inputManager);
             _objectResolver.RegisterInstance(_gameResourcesManager);
             _objectResolver.RegisterInstance(_techTreeManager);
+            _objectResolver.RegisterInstance(_immigrationManager);
             _objectResolver.RegisterInstance(_pawnRegistry);
             _objectResolver.RegisterInstance(_housingRegistry);
             _objectResolver.RegisterInstance(_pawnScheduler);

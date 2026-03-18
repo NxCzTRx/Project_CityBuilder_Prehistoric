@@ -8,37 +8,37 @@ namespace _Scripts.BuildSystem.Building.Housing
     {
         private readonly List<HouseController> _houses = new();
 
-        private int _occupiedSpace = 0;
-        private int _maxSpace = 0;
+        public int OccupiedSpace { get; private set; } = 0;
+        public int MaxSpace { get; private set; } = 0;
 
         public void RegisterHouse(HouseController house)
         {
             _houses.Add(house);
-            _maxSpace += house.Model.HouseSO.MaxResidents;
+            MaxSpace += house.Model.HouseSO.MaxResidents;
             
-            EventBus<OnHousingUpdated>.Publish(new OnHousingUpdated(_maxSpace, _occupiedSpace));
+            EventBus<OnHousingUpdated>.Publish(new OnHousingUpdated(MaxSpace, OccupiedSpace));
         }
 
         public void UnregisterHouse(HouseController house)
         {
             _houses.Remove(house);
-            _maxSpace -= house.Model.HouseSO.MaxResidents;
+            MaxSpace -= house.Model.HouseSO.MaxResidents;
             
-            EventBus<OnHousingUpdated>.Publish(new OnHousingUpdated(_maxSpace, _occupiedSpace));
+            EventBus<OnHousingUpdated>.Publish(new OnHousingUpdated(MaxSpace, OccupiedSpace));
         }
 
         public void AddOccupant(int quantity)
         {
-            _occupiedSpace += quantity;
+            OccupiedSpace += quantity;
             
-            EventBus<OnHousingUpdated>.Publish(new OnHousingUpdated(_maxSpace, _occupiedSpace));
+            EventBus<OnHousingUpdated>.Publish(new OnHousingUpdated(MaxSpace, OccupiedSpace));
         } 
         
         public void RemoveOccupant(int quantity)
         {
-            _occupiedSpace -= quantity;
+            OccupiedSpace -= quantity;
             
-            EventBus<OnHousingUpdated>.Publish(new OnHousingUpdated(_maxSpace, _occupiedSpace));
+            EventBus<OnHousingUpdated>.Publish(new OnHousingUpdated(MaxSpace, OccupiedSpace));
         } 
 
         public bool HasAvailableHousing => 
