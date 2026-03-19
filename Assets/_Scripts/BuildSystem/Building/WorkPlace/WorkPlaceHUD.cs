@@ -37,7 +37,7 @@ namespace _Scripts.BuildSystem.Building
 
         public void RemoveWorker()
         {
-            _controller.RemoveWorker();
+            _controller.RemoveRandomWorker();
             SetWorkerNumberTMP();
         }
 

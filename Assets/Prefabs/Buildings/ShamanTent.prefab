@@ -39,7 +39,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.013}
+  m_AnchoredPosition: {x: 0, y: 1.498}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &2367028101613003728
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: -8723266809948612039}
   - component: {fileID: 114572683965230009}
   m_Layer: 0
-  m_Name: StoneCamp
+  m_Name: ShamanTent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -242,7 +242,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.00398612, y: 0.01594454}
+  m_Offset: {x: 0.0047411323, y: 0.028446198}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -252,7 +252,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.0144548, y: 3.0127187}
+  m_Size: {x: 1.9756644, y: 1.9818788}
   m_EdgeRadius: 0
 --- !u!1 &4125489161274312919
 GameObject:
@@ -539,7 +539,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -5975223055878421462, guid: 220abecc5b01ca54c874533e6e42583c, type: 3}
+  m_Sprite: {fileID: 6827693178993216869, guid: 220abecc5b01ca54c874533e6e42583c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

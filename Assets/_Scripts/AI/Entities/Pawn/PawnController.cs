@@ -13,13 +13,13 @@ namespace _Scripts.AI.Entities.Pawn
 {
     public class PawnController : FSMController<PawnController>, IDisposable
     {
-        private PawnEntity _entity;
+        private readonly PawnEntity _entity;
         public PawnModel Model { get; }
         public PawnView View { get; }
         public PawnSpawner MySpawner { get; }
         public ObjectResolver Resolver { get; }
 
-        public float ProductionMultiplier {get; set;}
+        public float ProductionMultiplier { get; set; } = 1f;
 
         public PawnController(
             PawnModel model, 
@@ -62,7 +62,7 @@ namespace _Scripts.AI.Entities.Pawn
             }
         }
 
-        private void Die()
+        public void Die()
         {
             MySpawner.Despawn(_entity);
         }

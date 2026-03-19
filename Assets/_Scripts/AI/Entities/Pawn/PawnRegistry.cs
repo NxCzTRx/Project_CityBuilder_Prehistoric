@@ -13,7 +13,6 @@ namespace _Scripts.AI.Entities.Pawn
         public void RegisterPawn(PawnController pawnController)
         {
             _pawns.Add(pawnController);
-            Debug.Log(_pawns.Count + " pawns registered");
         }
 
         public void UnregisterPawn(PawnController pawnController)

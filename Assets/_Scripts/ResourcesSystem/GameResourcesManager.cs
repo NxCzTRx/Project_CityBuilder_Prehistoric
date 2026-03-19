@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using _Scripts.Events;
 using _Scripts.ResourcesSystem.Resources;
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
@@ -91,6 +92,16 @@ namespace _Scripts.ResourcesSystem
                     return false;
             }
             return true;
+        }
+
+        public ResourceTypeSO GetResourceTypeByName(string name)
+        {
+            var result = _resourcesAmount.FirstOrDefault(pair => pair.Key.ResourceName == name).Key;
+    
+            if (result == null)
+                Debug.LogWarning($"ResourceType '{name}' not found.");
+    
+            return result;
         }
     }
 }

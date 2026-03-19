@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9123888626393230016}
   - component: {fileID: 3368478186531155464}
   m_Layer: 0
-  m_Name: House
+  m_Name: ClanShelter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,7 +139,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 3502143622582859447, guid: 220abecc5b01ca54c874533e6e42583c, type: 3}
+  m_Sprite: {fileID: -654909251262979835, guid: 220abecc5b01ca54c874533e6e42583c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

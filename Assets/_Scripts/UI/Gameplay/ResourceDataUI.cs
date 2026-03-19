@@ -3,18 +3,21 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResourceDataUI : MonoBehaviour
+namespace _Scripts.UI.Gameplay
 {
-    [SerializeField] private Image icon;
-    [SerializeField] private TMP_Text resourceAmount;
-    public void SetUp(ResourceStock stock)
+    public class ResourceDataUI : MonoBehaviour
     {
-        icon.sprite = stock.ResourceTypeSO.ResourceIcon;
-        resourceAmount.text = stock.Amount.ToString();
-    }
+        [SerializeField] private Image icon;
+        [SerializeField] private TMP_Text resourceAmount;
+        public void SetUp(ResourceStock stock)
+        {
+            icon.sprite = stock.ResourceTypeSO.ResourceIcon;
+            resourceAmount.text = stock.Amount.ToString();
+        }
     
-    public void UpdateAmount(float amount)
-    {
-        resourceAmount.text = Mathf.FloorToInt(amount).ToString();
+        public void UpdateAmount(float amount)
+        {
+            resourceAmount.text = Mathf.FloorToInt(amount).ToString();
+        }
     }
 }

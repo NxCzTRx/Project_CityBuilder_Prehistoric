@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5ee9d34b5bec6840a3d135d45b97b7b, type: 3}
-  m_Name: WoodCamp
+  m_Name: ShamanTent
   m_EditorClassIdentifier: Assembly-CSharp::WorkPlaceSO
-  buildingName: Wood Camp
-  buildingWidth: 3
+  buildingName: Crop Field
+  buildingWidth: 2
   buildingHeight: 2
-  buildingSprite: {fileID: -2011790758174803037, guid: 220abecc5b01ca54c874533e6e42583c, type: 3}
-  buildingPrefab: {fileID: 3471649582723213855, guid: c9383a73d7ea4124bbbdb945cb5f350f, type: 3}
+  buildingSprite: {fileID: 6827693178993216869, guid: 220abecc5b01ca54c874533e6e42583c, type: 3}
+  buildingPrefab: {fileID: 3471649582723213855, guid: cdf6c81bb8fa97d4fa38418519295627, type: 3}
   buildingCost:
   - ResourceTypeSO: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}
-    Amount: 12
-  entranceCellFromGridOrigin: 1
-  maxWorkers: 2
+    Amount: 25
+  entranceCellFromGridOrigin: 0
+  maxWorkers: 1
   productionPerSecond: 0.1
-  resourceProduction: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}
+  resourceProduction: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}

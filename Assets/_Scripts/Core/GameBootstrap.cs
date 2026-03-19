@@ -9,6 +9,7 @@ using _Scripts.Core.DayCycle;
 using _Scripts.Core.GameMode;
 using _Scripts.Core.UpdateManagement;
 using _Scripts.Core.GameMode.Modes;
+using _Scripts.DisasterSystem;
 using _Scripts.Grid;
 using _Scripts.ImmigrationSystem;
 using _Scripts.Input;
@@ -32,6 +33,7 @@ namespace _Scripts.Core
         private PawnScheduler _pawnScheduler;
         private GameModeManager _gameModeManager;
         private GameResourcesManager _gameResourcesManager;
+        private DisasterManager _disasterManager;
         private TechTreeManager _techTreeManager;
         private ImmigrationManager _immigrationManager;
         private PawnRegistry _pawnRegistry;
@@ -62,14 +64,15 @@ namespace _Scripts.Core
             var pawnSpawner = Instantiate(pawnSpawnerPrefab);
             
             _gridManager = new GridManager(20, 20, 1f);
-            _gameCycleManager = new GameCycleManager();
             _gameModeManager = new GameModeManager(new DefaultGameMode(), inputManager, buildManager);
             _gameResourcesManager = new GameResourcesManager(initialResources);
             _techTreeManager = new TechTreeManager(techEras, _gameResourcesManager);
             _pawnRegistry = new PawnRegistry();
             _housingRegistry = new HousingRegistry();
-            _pawnScheduler = new PawnScheduler(_gameCycleManager, _pawnRegistry);
             _immigrationManager = new ImmigrationManager(new Vector2(0,0), _housingRegistry, pawnSpawner);
+            _disasterManager = new DisasterManager();
+            _gameCycleManager = new GameCycleManager(_disasterManager);
+            _pawnScheduler = new PawnScheduler(_gameCycleManager, _pawnRegistry);
             
             _objectResolver.RegisterInstance(buildManager);
             _objectResolver.RegisterInstance(_gridManager);
@@ -88,6 +91,7 @@ namespace _Scripts.Core
             buildManager.Init(_objectResolver);
             cameraController.Init(_objectResolver);
             pawnSpawner.Init(_objectResolver);
+            _disasterManager.Init(_objectResolver);
 
             _pawnSpawner = pawnSpawner; //TEST
             

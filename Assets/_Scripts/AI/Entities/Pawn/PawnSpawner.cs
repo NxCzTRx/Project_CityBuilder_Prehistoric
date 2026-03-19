@@ -42,7 +42,8 @@ namespace _Scripts.AI.Entities.Pawn
         public void Despawn(PawnEntity entity)
         {
             _pawnRegistry.UnregisterPawn(entity.PawnController);
-            entity.PawnController.Model.HouseController.RemoveResident(entity.PawnController);
+            entity.PawnController.Model.HouseController?.RemoveResident(entity.PawnController);
+            entity.PawnController.Model.WorkPlaceController?.RemoveWorker(entity.PawnController);
             Destroy(entity.gameObject);
         }
     }
