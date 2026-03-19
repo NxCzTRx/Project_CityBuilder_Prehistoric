@@ -19,8 +19,6 @@ namespace _Scripts.AI.Entities.Pawn
         public PawnSpawner MySpawner { get; }
         public ObjectResolver Resolver { get; }
 
-        public float ProductionMultiplier { get; set; } = 1f;
-
         public PawnController(
             PawnModel model, 
             PawnView view, 

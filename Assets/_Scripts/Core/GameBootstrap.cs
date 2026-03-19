@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using _Scripts.AI.Entities.Pawn;
+using _Scripts.AI.Entities.Pawn.Roles;
 using _Scripts.AI.Entities.Pawn.Scheduling;
 using _Scripts.BuildSystem;
 using _Scripts.BuildSystem.Building.Housing;
@@ -38,6 +39,7 @@ namespace _Scripts.Core
         private ImmigrationManager _immigrationManager;
         private PawnRegistry _pawnRegistry;
         private HousingRegistry _housingRegistry;
+        private RoleProductionRegistry _roleProductionRegistry;
         
         private PawnSpawner _pawnSpawner; //TEST
 
@@ -66,13 +68,14 @@ namespace _Scripts.Core
             _gridManager = new GridManager(20, 20, 1f);
             _gameModeManager = new GameModeManager(new DefaultGameMode(), inputManager, buildManager);
             _gameResourcesManager = new GameResourcesManager(initialResources);
-            _techTreeManager = new TechTreeManager(techEras, _gameResourcesManager);
+            _techTreeManager = new TechTreeManager(techEras);
             _pawnRegistry = new PawnRegistry();
             _housingRegistry = new HousingRegistry();
             _immigrationManager = new ImmigrationManager(new Vector2(0,0), _housingRegistry, pawnSpawner);
             _disasterManager = new DisasterManager();
             _gameCycleManager = new GameCycleManager(_disasterManager);
             _pawnScheduler = new PawnScheduler(_gameCycleManager, _pawnRegistry);
+            _roleProductionRegistry = new RoleProductionRegistry();
             
             _objectResolver.RegisterInstance(buildManager);
             _objectResolver.RegisterInstance(_gridManager);
@@ -85,6 +88,8 @@ namespace _Scripts.Core
             _objectResolver.RegisterInstance(_housingRegistry);
             _objectResolver.RegisterInstance(_pawnScheduler);
             _objectResolver.RegisterInstance(pawnSpawner);
+            _objectResolver.RegisterInstance(_roleProductionRegistry);
+            _objectResolver.RegisterInstance(gameplayUI);
         
             _gameCycleManager.Init();
             selectableController.Init(_objectResolver);
@@ -92,6 +97,7 @@ namespace _Scripts.Core
             cameraController.Init(_objectResolver);
             pawnSpawner.Init(_objectResolver);
             _disasterManager.Init(_objectResolver);
+            _techTreeManager.Init(_objectResolver);
 
             _pawnSpawner = pawnSpawner; //TEST
             

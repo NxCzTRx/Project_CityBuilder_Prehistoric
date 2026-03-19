@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using _Scripts.Core;
 using _Scripts.Events;
 using _Scripts.ResourcesSystem;
 using _Scripts.ResourcesSystem.Resources;
@@ -10,16 +11,23 @@ namespace _Scripts.TechTreeSystem
 {
     public class TechTreeManager
     {
+        private ObjectResolver _resolver;
         private readonly HashSet<TechNodeSO> _unlocked = new();
         public TechEraSo[] Eras {get; }
         private int _currentEraIndex;
 
         private GameResourcesManager _gameResourcesManager;
 
-        public TechTreeManager(TechEraSo[] eras, GameResourcesManager gameResourcesManager)
+        public TechTreeManager(TechEraSo[] eras)
         {
             Eras = eras;
-            _gameResourcesManager = gameResourcesManager;
+        }
+
+        public void Init(ObjectResolver objectResolver)
+        {
+            _resolver = objectResolver;
+            
+            _gameResourcesManager = _resolver.Resolve<GameResourcesManager>();
         }
 
         public bool IsUnlocked(TechNodeSO techNode) => 
@@ -42,8 +50,8 @@ namespace _Scripts.TechTreeSystem
             _unlocked.Add(techNode);
             _gameResourcesManager.RemoveResources(new ResourceStock(techNode.KnowledgeResourceSo, techNode.TechCost));
 
-            //foreach (var effect in techNode.Effects)
-                //effect.Apply();
+            foreach (var effect in techNode.Effects)
+                effect.Apply(_resolver);
 
             EventBus<OnNodeUnlocked>.Publish(new OnNodeUnlocked(techNode));
             CheckEraCompleted();

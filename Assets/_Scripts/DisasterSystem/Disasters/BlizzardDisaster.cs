@@ -1,30 +1,32 @@
 using _Scripts.AI.Entities.Pawn;
+using _Scripts.AI.Entities.Pawn.Roles;
 using UnityEngine;
 
 namespace _Scripts.DisasterSystem.Disasters
 {
     public class BlizzardDisaster : IDisaster
     {
-        private readonly PawnRegistry _pawnRegistry;
+        private readonly RoleProductionRegistry _roleProductionRegistry;
 
-        private const float ProductionMultiplierDuringDisaster = 0.75f;
+        private const float ProductionMultiplierDuringDisaster = 0.5f;
+
+        private float _previousMultiplier;
         
-        public BlizzardDisaster(PawnRegistry pawnRegistry)
+        public BlizzardDisaster(RoleProductionRegistry roleProductionRegistry)
         {
-            _pawnRegistry = pawnRegistry;
+            _roleProductionRegistry = roleProductionRegistry;
         }
         
         public void OnStart()
         {
-            foreach (var pawn in _pawnRegistry.GetAllPawns())
-                pawn.ProductionMultiplier = ProductionMultiplierDuringDisaster;
+            _previousMultiplier = _roleProductionRegistry.BaseProductionMultiplier;
+            _roleProductionRegistry.ApplyBaseBonus(ProductionMultiplierDuringDisaster - 1f);
             Debug.Log("Blizzard DISASTER started");
         }
 
         public void OnEnd()
         {
-            foreach (var pawn in _pawnRegistry.GetAllPawns())
-                pawn.ProductionMultiplier = 1f;
+            _roleProductionRegistry.ApplyBaseBonus(_previousMultiplier - _roleProductionRegistry.BaseProductionMultiplier);
             Debug.Log("Blizzard DISASTER ended");
         }
 

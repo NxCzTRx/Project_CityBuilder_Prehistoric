@@ -29,8 +29,7 @@ namespace _Scripts.AI.FSM.States
 
         public override void OnUpdate()
         {
-            var stock = _workPlaceController.GetProduction(
-                Time.deltaTime, Controller.ProductionMultiplier);
+            var stock = _workPlaceController.GetProduction(Time.deltaTime);
             _gameResourcesManager.AddResources(stock);
         }
 

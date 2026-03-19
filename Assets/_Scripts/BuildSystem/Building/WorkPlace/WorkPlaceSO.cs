@@ -1,3 +1,4 @@
+using _Scripts.AI.Entities.Pawn.Roles;
 using _Scripts.BuildSystem;
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
 using Mono.Cecil;
@@ -14,4 +15,7 @@ public class WorkPlaceSO : BuildingSO
 
     public ResourceTypeSO ResourceProduction => resourceProduction;
     [SerializeField] private ResourceTypeSO resourceProduction;
+    
+    public PawnRoleType PawnRoleType => pawnRoleType;
+    [SerializeField] private PawnRoleType pawnRoleType;
 }

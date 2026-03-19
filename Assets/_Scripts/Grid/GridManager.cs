@@ -4,15 +4,15 @@ namespace _Scripts.Grid
 {
     public class GridManager
     {
-        private readonly int _gridWidth = 20;
-        private readonly int _gridHeight = 20;
+        public int GridWidth { get; } = 20;
+        public int GridHeight { get; }  = 20;
         private readonly float _cellSize = 1f;
         public float CellSize => _cellSize;
     
         public GridManager(int width, int height, float cellSize)
         {
-            _gridWidth = width;
-            _gridHeight = height;
+            GridWidth = width;
+            GridHeight = height;
             _cellSize = cellSize;
 
             CreateGrid();
@@ -22,11 +22,11 @@ namespace _Scripts.Grid
 
         private void CreateGrid()
         {
-            _grid = new Cell[_gridWidth, _gridHeight];
+            _grid = new Cell[GridWidth, GridHeight];
 
-            for (int x = 0; x < _gridWidth; x++)
+            for (int x = 0; x < GridWidth; x++)
             {
-                for (int y = 0; y < _gridHeight; y++)
+                for (int y = 0; y < GridHeight; y++)
                 {
                     _grid[x, y] = new Cell(new Vector2Int(x, y));
                 }
@@ -35,8 +35,8 @@ namespace _Scripts.Grid
 
         private bool IsValidPosition(Vector2Int position)
         {
-            return position.x >= 0 && position.x < _gridWidth && 
-                   position.y >= 0 && position.y < _gridHeight;
+            return position.x >= 0 && position.x < GridWidth && 
+                   position.y >= 0 && position.y < GridHeight;
         }
 
         public Cell GetCell(Vector2Int position) =>
@@ -49,9 +49,9 @@ namespace _Scripts.Grid
         {
             if (_grid is null) return;
         
-            for (int x = 0; x < _gridWidth; x++)
+            for (int x = 0; x < GridWidth; x++)
             {
-                for (int y = 0; y < _gridHeight; y++)
+                for (int y = 0; y < GridHeight; y++)
                 {
                     Vector3 cellPosition = new Vector3(
                         _grid[x, y].Position.x * _cellSize + _cellSize / 2f, 

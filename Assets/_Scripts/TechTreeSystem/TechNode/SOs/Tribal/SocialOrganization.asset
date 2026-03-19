@@ -16,3 +16,5 @@ MonoBehaviour:
   icon: {fileID: 0}
   techCost: 65
   knowledgeResourceSo: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
+  effects:
+  - {fileID: 11400000, guid: be8645ed314924149b738b6c02050914, type: 2}

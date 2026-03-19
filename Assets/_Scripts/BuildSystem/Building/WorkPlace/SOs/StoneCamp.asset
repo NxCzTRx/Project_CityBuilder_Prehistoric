@@ -24,3 +24,4 @@ MonoBehaviour:
   maxWorkers: 2
   productionPerSecond: 0.025
   resourceProduction: {fileID: 11400000, guid: 783e8c12f01920542b3a33cab68f3b5b, type: 2}
+  pawnRoleType: 3

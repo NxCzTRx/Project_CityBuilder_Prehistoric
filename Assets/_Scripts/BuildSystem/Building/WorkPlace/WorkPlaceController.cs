@@ -14,10 +14,12 @@ namespace _Scripts.BuildSystem.Building.WorkPlace
         public WorkPlaceView View { get; }
         
         private readonly PawnScheduler _pawnScheduler;
+        private readonly RoleProductionRegistry _roleProductionRegistry;
 
         public WorkPlaceController(WorkPlaceModel model, WorkPlaceView view, ObjectResolver objectResolver)
         {
             _pawnScheduler = objectResolver.Resolve<PawnScheduler>();
+            _roleProductionRegistry = objectResolver.Resolve<RoleProductionRegistry>();
             
             Model = model;
             View = view;
@@ -31,9 +33,12 @@ namespace _Scripts.BuildSystem.Building.WorkPlace
         {
             if (!HasSpace) return;
             Model.PawnWorkers.Add(pawnController);
-            pawnController.Model.CurrentRole = PawnRoleType.Employee;
+            pawnController.Model.CurrentRole = Model.WorkPlaceSO.PawnRoleType;
             pawnController.Model.WorkPlaceController = this;
             _pawnScheduler.EvaluatePawn(pawnController);
+            
+            if (Model.WorkPlaceSO.PawnRoleType == PawnRoleType.None)
+                Debug.LogError("Pawn role cannot be None, check building pawnRoleType");
         }
 
         public void RemoveWorker(PawnController pawnController)
@@ -54,10 +59,12 @@ namespace _Scripts.BuildSystem.Building.WorkPlace
             RemoveWorker(randomWorker);
         }
 
-        public ResourceStock GetProduction(float deltaSecondsProducing, float pawnProductionMultiplier)
+        public ResourceStock GetProduction(float deltaSecondsProducing)
         {
-            return new ResourceStock(Model.WorkPlaceSO.ResourceProduction, 
-                Model.WorkPlaceSO.ProductionPerSecond * pawnProductionMultiplier * deltaSecondsProducing);
+            var roleMultiplier = _roleProductionRegistry.GetMultiplier(Model.WorkPlaceSO.PawnRoleType);
+            var amount = Model.WorkPlaceSO.ProductionPerSecond * roleMultiplier * deltaSecondsProducing;
+    
+            return new ResourceStock(Model.WorkPlaceSO.ResourceProduction, amount);
         }
     }
 }

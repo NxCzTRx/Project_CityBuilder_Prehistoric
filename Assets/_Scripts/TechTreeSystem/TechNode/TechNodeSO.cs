@@ -1,4 +1,5 @@
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
+using _Scripts.TechTreeSystem.TechEffect;
 using UnityEngine;
 
 namespace _Scripts.TechTreeSystem.TechNode
@@ -17,5 +18,8 @@ namespace _Scripts.TechTreeSystem.TechNode
         
         public ResourceTypeSO KnowledgeResourceSo => knowledgeResourceSo;
         [SerializeField] private ResourceTypeSO knowledgeResourceSo;
+        
+        public TechEffectSO[] Effects => effects;
+        [SerializeField] private TechEffectSO[] effects;
     }
 }

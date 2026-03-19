@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e27e09a4fc3bfc4f991296e9e6ef481, type: 3}
-  m_Name: OrganizedHuntTech
+  m_Name: ShelterExpansionTech
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.TechTreeSystem.TechNode.TechNodeSO
-  nodeName: Organized Hunt
+  nodeName: Shelter Expansion
   icon: {fileID: 0}
-  techCost: 10
+  techCost: 20
   knowledgeResourceSo: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
+  effects:
+  - {fileID: 11400000, guid: 2c1efe4cce0bed643bc532882140baad, type: 2}

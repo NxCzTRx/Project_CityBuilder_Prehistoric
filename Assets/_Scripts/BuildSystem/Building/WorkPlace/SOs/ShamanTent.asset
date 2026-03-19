@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5ee9d34b5bec6840a3d135d45b97b7b, type: 3}
   m_Name: ShamanTent
   m_EditorClassIdentifier: Assembly-CSharp::WorkPlaceSO
-  buildingName: Crop Field
+  buildingName: Shaman Tent
   buildingWidth: 2
   buildingHeight: 2
   buildingSprite: {fileID: 6827693178993216869, guid: 220abecc5b01ca54c874533e6e42583c, type: 3}
@@ -24,3 +24,4 @@ MonoBehaviour:
   maxWorkers: 1
   productionPerSecond: 0.1
   resourceProduction: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
+  pawnRoleType: 5

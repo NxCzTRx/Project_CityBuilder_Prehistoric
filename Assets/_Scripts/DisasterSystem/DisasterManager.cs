@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using _Scripts.AI.Entities.Pawn;
+using _Scripts.AI.Entities.Pawn.Roles;
 using _Scripts.Core;
 using _Scripts.Core.UpdateManagement;
 using _Scripts.DisasterSystem.Disasters;
@@ -26,7 +27,7 @@ namespace _Scripts.DisasterSystem
         {
             _disasters = new()
             {
-                (new BlizzardDisaster(objectResolver.Resolve<PawnRegistry>()), 30f),
+                (new BlizzardDisaster(objectResolver.Resolve<RoleProductionRegistry>()), 30f),
                 (new DiseaseDisaster(objectResolver.Resolve<PawnRegistry>(),
                     objectResolver.Resolve<PawnSpawner>()), 10f),
                 (new FoodRotDisaster(objectResolver.Resolve<GameResourcesManager>()), 20f)
