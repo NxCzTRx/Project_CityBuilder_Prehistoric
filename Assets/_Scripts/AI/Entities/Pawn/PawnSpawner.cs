@@ -2,6 +2,7 @@ using _Scripts.AI.Entities.Pawn.Scheduling;
 using _Scripts.AI.FSM.States;
 using _Scripts.BuildSystem.Building.Housing;
 using _Scripts.Core;
+using _Scripts.Events;
 using _Scripts.Grid;
 using UnityEngine;
 
@@ -44,6 +45,9 @@ namespace _Scripts.AI.Entities.Pawn
             _pawnRegistry.UnregisterPawn(entity.PawnController);
             entity.PawnController.Model.HouseController?.RemoveResident(entity.PawnController);
             entity.PawnController.Model.WorkPlaceController?.RemoveWorker(entity.PawnController);
+            
+            EventBus<OnPawnDied>.Publish(new OnPawnDied());
+            
             Destroy(entity.gameObject);
         }
     }

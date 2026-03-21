@@ -7,11 +7,11 @@ namespace _Scripts.UI.Gameplay
 {
     public class ResourceDataUI : MonoBehaviour
     {
-        [SerializeField] private Image icon;
+        [SerializeField] private TMP_Text resourceType;
         [SerializeField] private TMP_Text resourceAmount;
         public void SetUp(ResourceStock stock)
         {
-            icon.sprite = stock.ResourceTypeSO.ResourceIcon;
+            resourceType.text = stock.ResourceTypeSO.ResourceName;
             resourceAmount.text = stock.Amount.ToString();
         }
     

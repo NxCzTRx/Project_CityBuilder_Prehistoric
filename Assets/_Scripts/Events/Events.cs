@@ -88,4 +88,8 @@ namespace _Scripts.Events
             DisplayDuration = displayDuration;
         }
     }
+    
+    public struct OnPawnDied : IEvent{ }  
+    public struct OnVictory : IEvent { } 
+    public struct OnDefeat : IEvent { } 
 }

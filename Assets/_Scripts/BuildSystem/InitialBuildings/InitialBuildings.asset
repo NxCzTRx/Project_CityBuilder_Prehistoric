@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Scripts.BuildSystem.InitialBuildings.InitialBuildingsSO
   buildings:
   - BuildingSo: {fileID: 11400000, guid: 72836ab987ca28a4faf007423c8ed71b, type: 2}
-    GridOrigin: {x: 22, y: 22}
+    GridOrigin: {x: 24, y: 24}
   - BuildingSo: {fileID: 11400000, guid: aafb009a3b603d14083c2f1c1ab87aeb, type: 2}
-    GridOrigin: {x: 19, y: 19}
+    GridOrigin: {x: 21, y: 21}

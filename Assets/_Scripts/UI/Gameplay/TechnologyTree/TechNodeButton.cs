@@ -36,9 +36,9 @@ namespace _Scripts.UI.Gameplay.TechnologyTree
         public void Refresh()
         {
             bool unlocked = _techTreeManager.IsUnlocked(_node);
-            bool canUnlock = _techTreeManager.CanUnlock(_node);
+            bool inCurrentEra = _techTreeManager.IsInCurrentEra(_node);
 
-            button.interactable = canUnlock;
+            button.interactable = inCurrentEra && !unlocked;
             unlockedOverlay.gameObject.SetActive(unlocked);
             costText.gameObject.SetActive(!unlocked);
         }

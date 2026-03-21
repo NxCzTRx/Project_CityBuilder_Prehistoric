@@ -1,6 +1,7 @@
 using _Scripts.Core;
 using _Scripts.Grid;
 using _Scripts.Input;
+using _Scripts.NotificationSystem;
 using _Scripts.ResourcesSystem;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ namespace _Scripts.BuildSystem
         private GridManager _gridManager;
         private InputManager _inputManager;
         private GameResourcesManager _gameResourcesManager;
+        private NotificationManager _notificationManager;
 
         private UnityEngine.Camera _mainCamera;
 
@@ -27,6 +29,7 @@ namespace _Scripts.BuildSystem
             _gridManager = objectResolver.Resolve<GridManager>();
             _inputManager = objectResolver.Resolve<InputManager>();
             _gameResourcesManager = objectResolver.Resolve<GameResourcesManager>();
+            _notificationManager = objectResolver.Resolve<NotificationManager>();
 
             _placementController = new PlacementController(_gridManager);
             buildController.Init(_gridManager, objectResolver);
@@ -36,9 +39,15 @@ namespace _Scripts.BuildSystem
         
         private void HandleBuildRequest()
         {
-            if (!_placementController.IsValidPlacement(_currentPlacement.gridOrigin, _selectedBuildingData) ||
-                !_gameResourcesManager.CanAfford(_selectedBuildingData.BuildingCost))
+            if (!_placementController.IsValidPlacement(_currentPlacement.gridOrigin, _selectedBuildingData))
                 return;
+
+            if (!_gameResourcesManager.CanAfford(_selectedBuildingData.BuildingCost))
+            {
+                _notificationManager.Notify(
+                    $"Not enough resources for building {_selectedBuildingData.BuildingName}.", 3f);
+                return;
+            }
             
             _gameResourcesManager.RemoveResources(_selectedBuildingData.BuildingCost);
             buildController.Build(

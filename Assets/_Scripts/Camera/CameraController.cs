@@ -19,11 +19,13 @@ namespace _Scripts.Camera
         
         private InputManager _inputManager;
     
-        public void Init(ObjectResolver objectResolver)
+        public void Init(ObjectResolver objectResolver, Vector2 startPos)
         {
             _inputManager = objectResolver.Resolve<InputManager>();
             
             InitializeInput();
+            
+            transform.position = new Vector3(startPos.x, startPos.y, transform.position.z);
         }
         
         private void OnEnable()

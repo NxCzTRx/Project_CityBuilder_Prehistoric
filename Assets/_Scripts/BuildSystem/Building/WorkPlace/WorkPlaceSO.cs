@@ -1,7 +1,6 @@
 using _Scripts.AI.Entities.Pawn.Roles;
 using _Scripts.BuildSystem;
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
-using Mono.Cecil;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "WorkPlaceSO", menuName = "Scriptable Objects/BuildingSO/WorkPlaceSO")]

@@ -43,6 +43,7 @@ namespace _Scripts.Core
         private PawnRegistry _pawnRegistry;
         private HousingRegistry _housingRegistry;
         private RoleProductionRegistry _roleProductionRegistry;
+        private GameConditionManager _gameConditionManager;
         
         private PawnSpawner _pawnSpawner;
 
@@ -101,11 +102,12 @@ namespace _Scripts.Core
             _gameCycleManager.Init();
             selectableController.Init(_objectResolver);
             buildManager.Init(_objectResolver);
-            cameraController.Init(_objectResolver);
+            cameraController.Init(_objectResolver, new Vector2(25, 25));
             pawnSpawner.Init(_objectResolver);
             _disasterManager.Init(_objectResolver);
             _techTreeManager.Init(_objectResolver);
             _immigrationManager.Init(_objectResolver);
+            _gameConditionManager = new GameConditionManager(_objectResolver);
 
             _pawnSpawner = pawnSpawner; //TEST
             

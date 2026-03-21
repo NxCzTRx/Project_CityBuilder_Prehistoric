@@ -20,6 +20,8 @@ MonoBehaviour:
   buildingCost:
   - ResourceTypeSO: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}
     Amount: 20
+  - ResourceTypeSO: {fileID: 11400000, guid: 783e8c12f01920542b3a33cab68f3b5b, type: 2}
+    Amount: 5
   entranceCellFromGridOrigin: 1
   maxWorkers: 3
   productionPerSecond: 0.075

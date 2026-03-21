@@ -39,9 +39,13 @@ namespace _Scripts.TechTreeSystem
         public bool CanUnlock(TechNodeSO techNode)
         {
             if (IsUnlocked(techNode)) return false;
+
             if (!_gameResourcesManager.CanAfford(
-                    new ResourceStock(techNode.KnowledgeResourceSo, techNode.TechCost))) 
+                    new ResourceStock(techNode.KnowledgeResourceSo, techNode.TechCost)))
+            {
+                _notificationManager.Notify($"Not enough knowledge for {techNode.NodeName}.", 3f);
                 return false;
+            }
     
             return Eras[_currentEraIndex].TechNodes.Contains(techNode);
         }
@@ -73,5 +77,11 @@ namespace _Scripts.TechTreeSystem
             
             EventBus<OnEraCompleted>.Publish(new OnEraCompleted(Eras[_currentEraIndex]));
         }
+        
+        public bool IsInCurrentEra(TechNodeSO node) => 
+            Eras[_currentEraIndex].TechNodes.Contains(node);
+        
+        public bool AllUnlocked() => 
+            Eras.SelectMany(e => e.TechNodes).All(n => _unlocked.Contains(n));
     }
 }
