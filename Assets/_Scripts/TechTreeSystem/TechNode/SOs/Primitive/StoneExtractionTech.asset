@@ -18,3 +18,4 @@ MonoBehaviour:
   knowledgeResourceSo: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
   effects:
   - {fileID: 11400000, guid: f0aa3a431e1c7c04abbd0025f98e8bc9, type: 2}
+  effectDescription: Unlocks stone camp building.

@@ -15,7 +15,7 @@ MonoBehaviour:
   buildingName: HunterPost
   buildingWidth: 2
   buildingHeight: 2
-  buildingSprite: {fileID: -2011790758174803037, guid: 220abecc5b01ca54c874533e6e42583c, type: 3}
+  buildingSprite: {fileID: 6827693178993216869, guid: 220abecc5b01ca54c874533e6e42583c, type: 3}
   buildingPrefab: {fileID: 3471649582723213855, guid: 76dfe86c2aaacbd47a472d260cfc4fce, type: 3}
   buildingCost:
   - ResourceTypeSO: {fileID: 11400000, guid: 8e87d3ce22afb8243b5cd903b917199b, type: 2}

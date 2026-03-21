@@ -1,3 +1,4 @@
+using _Scripts.NotificationSystem;
 using _Scripts.ResourcesSystem;
 using _Scripts.ResourcesSystem.Resources;
 using UnityEngine;
@@ -7,13 +8,15 @@ namespace _Scripts.DisasterSystem.Disasters
     public class FoodRotDisaster : IDisaster
     {
         private readonly GameResourcesManager _gameResourcesManager;
+        private readonly NotificationManager _notificationManager;
         
         private const string ResourceTypeName = "Food";
         private const float FoodStealRatio = 0.33f;
         
-        public FoodRotDisaster(GameResourcesManager gameResourcesManager)
+        public FoodRotDisaster(GameResourcesManager gameResourcesManager, NotificationManager notificationManager)
         {
             _gameResourcesManager = gameResourcesManager;
+            _notificationManager = notificationManager;
         }
         
         public void OnStart()
@@ -26,7 +29,7 @@ namespace _Scripts.DisasterSystem.Disasters
             _gameResourcesManager.RemoveResources(
                 new ResourceStock(resourceTypeSo, amountToSubtract));
             
-            Debug.Log("FoodROT DISASTER");
+            _notificationManager.Notify($"{amountToSubtract} food has rotten.", 10f);
         }
 
         public void OnEnd()

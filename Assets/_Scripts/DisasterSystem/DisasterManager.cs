@@ -5,6 +5,7 @@ using _Scripts.AI.Entities.Pawn.Roles;
 using _Scripts.Core;
 using _Scripts.Core.UpdateManagement;
 using _Scripts.DisasterSystem.Disasters;
+using _Scripts.NotificationSystem;
 using _Scripts.ResourcesSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -27,10 +28,19 @@ namespace _Scripts.DisasterSystem
         {
             _disasters = new()
             {
-                (new BlizzardDisaster(objectResolver.Resolve<RoleProductionRegistry>()), 30f),
-                (new DiseaseDisaster(objectResolver.Resolve<PawnRegistry>(),
-                    objectResolver.Resolve<PawnSpawner>()), 10f),
-                (new FoodRotDisaster(objectResolver.Resolve<GameResourcesManager>()), 20f)
+                (new BlizzardDisaster(
+                    objectResolver.Resolve<RoleProductionRegistry>(),
+                    objectResolver.Resolve<NotificationManager>()),
+                    30f),
+                (new DiseaseDisaster(
+                    objectResolver.Resolve<PawnRegistry>(),
+                    objectResolver.Resolve<PawnSpawner>(),
+                    objectResolver.Resolve<NotificationManager>()),
+                    10f),
+                (new FoodRotDisaster(
+                    objectResolver.Resolve<GameResourcesManager>(),
+                    objectResolver.Resolve<NotificationManager>())
+                    , 20f)
             };
         }
 

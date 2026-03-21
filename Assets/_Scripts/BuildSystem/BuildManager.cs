@@ -45,6 +45,11 @@ namespace _Scripts.BuildSystem
                 _currentPlacement.gridOrigin, _currentPlacement.worldCenter, _selectedBuildingData);
         }
 
+        public void ManualBuildRequest(Vector2Int gridOrigin, BuildingSO buildingSo)
+        {
+            buildController.Build(gridOrigin, buildingSo);
+        }
+
         private void HandleBuildingPlacement(Vector2 mousePosition)
         {
             var cellPos = GridUtils.GetCellFromMousePosition(

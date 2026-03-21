@@ -17,6 +17,16 @@ namespace _Scripts.BuildSystem
             _gridManager =  gridManager;
             _objectResolver = objectResolver;
         }
+        
+        public void Build(Vector2Int gridOrigin, BuildingSO buildingSO)
+        {
+            var originCell = GridUtils.CellToWorldPosition(gridOrigin, _gridManager.CellSize);
+            var worldCenter = new Vector2(
+                originCell.x + (buildingSO.BuildingWidth - 1) * _gridManager.CellSize / 2f,
+                originCell.y + (buildingSO.BuildingHeight - 1) * _gridManager.CellSize / 2f);
+
+            Build(gridOrigin, worldCenter, buildingSO);
+        }
     
         public void Build(Vector2Int gridOrigin, Vector2 worldCenter, BuildingSO buildingSO)
         {

@@ -18,3 +18,4 @@ MonoBehaviour:
   knowledgeResourceSo: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
   effects:
   - {fileID: 11400000, guid: 441d8be3b633d2142b10574f878a5de2, type: 2}
+  effectDescription: Unlocks shaman tent building.

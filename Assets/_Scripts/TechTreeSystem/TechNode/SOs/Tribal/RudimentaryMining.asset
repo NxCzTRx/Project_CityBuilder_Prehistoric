@@ -18,3 +18,4 @@ MonoBehaviour:
   knowledgeResourceSo: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
   effects:
   - {fileID: 11400000, guid: 04ba089aad899974b988084f25e4c927, type: 2}
+  effectDescription: +50% stone production.

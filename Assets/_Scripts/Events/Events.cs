@@ -3,6 +3,7 @@ using _Scripts.Core.DayCycle;
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
 using _Scripts.TechTreeSystem.TechEra;
 using _Scripts.TechTreeSystem.TechNode;
+using UnityEngine;
 
 namespace _Scripts.Events
 {
@@ -74,5 +75,17 @@ namespace _Scripts.Events
     {
         public TechEraSo Era { get; }
         public OnEraCompleted(TechEraSo era) => Era = era;
+    }
+    
+    public struct OnGameNotification : IEvent
+    {
+        public string Message { get; }
+        public float DisplayDuration { get; }
+
+        public OnGameNotification(string message, float displayDuration)
+        {
+            Message = message;
+            DisplayDuration = displayDuration;
+        }
     }
 }

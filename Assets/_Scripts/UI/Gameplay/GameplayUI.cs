@@ -11,7 +11,7 @@ namespace _Scripts.UI.Gameplay
     {
         public BuildUI BuildUI => buildUI;
         [SerializeField] private BuildUI buildUI;
-        
+        [SerializeField] private HousingUI housingUI;
         [SerializeField] private PlayerResourcesUI playerResourcesUI;
         [SerializeReference] private TechnologyTreeUI technologyTreeUI;
     
@@ -19,6 +19,7 @@ namespace _Scripts.UI.Gameplay
         {
             playerResourcesUI.Init(objectResolver.Resolve<GameResourcesManager>());
             technologyTreeUI.Init(objectResolver.Resolve<TechTreeManager>());
+            housingUI.Init();
         }
     }
 }

@@ -18,3 +18,4 @@ MonoBehaviour:
   knowledgeResourceSo: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
   effects:
   - {fileID: 11400000, guid: 888bba0ec7f0c9545a3635ee53de8e47, type: 2}
+  effectDescription: +60% shaman tent knowledge generation.

@@ -4,6 +4,7 @@ using _Scripts.AI.FSM;
 using _Scripts.AI.FSM.States;
 using _Scripts.Core;
 using _Scripts.Grid;
+using _Scripts.NotificationSystem;
 using _Scripts.ResourcesSystem;
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
 using Mono.Cecil;

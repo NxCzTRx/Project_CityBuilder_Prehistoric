@@ -3,7 +3,9 @@ using _Scripts.AI.Entities.Pawn.Roles;
 using _Scripts.BuildSystem.Building;
 using _Scripts.BuildSystem.Building.Housing;
 using _Scripts.BuildSystem.Building.WorkPlace;
+using _Scripts.Core;
 using _Scripts.Grid;
+using _Scripts.NotificationSystem;
 using _Scripts.ResourcesSystem;
 using _Scripts.ResourcesSystem.Resources.ResourceTypes;
 using UnityEngine;
@@ -17,6 +19,8 @@ namespace _Scripts.AI.Entities.Pawn
         public Cell CurrentCell;
         public WorkPlaceController WorkPlaceController {get; set;}
         public HouseController HouseController {get; set;}
+        
+        private readonly NotificationManager _notificationManager;
         
         public Action<float> OnHealthChanged;
         public Action<float> OnHungerChanged;
@@ -39,6 +43,7 @@ namespace _Scripts.AI.Entities.Pawn
                 OnHealthChanged?.Invoke(_health);
                 
                 if (_health > 0) return;
+                _notificationManager.Notify("Pawn has died due to lack of food and hunger", 8f);
                 OnDie?.Invoke();
             }
         }
@@ -61,11 +66,13 @@ namespace _Scripts.AI.Entities.Pawn
 
         public float Speed { get; set; } = 3f;
 
-        public PawnModel(GridManager gridManager, Vector3 position, ResourceTypeSO food)
+        public PawnModel(ObjectResolver resolver, Vector3 position, ResourceTypeSO food)
         {
+            var gridManager = resolver.Resolve<GridManager>();
             CurrentCell = gridManager.GetCell(
                 GridUtils.WorldToGridPosition(position, gridManager.CellSize));
             WhatIsFood = food;
+            _notificationManager = resolver.Resolve<NotificationManager>();
         }
     }
 }

@@ -21,5 +21,8 @@ namespace _Scripts.TechTreeSystem.TechNode
         
         public TechEffectSO[] Effects => effects;
         [SerializeField] private TechEffectSO[] effects;
+        
+        public string EffectDescription => effectDescription;
+        [SerializeField] private string effectDescription;
     }
 }

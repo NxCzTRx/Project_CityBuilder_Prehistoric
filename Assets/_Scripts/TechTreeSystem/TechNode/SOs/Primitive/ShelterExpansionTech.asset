@@ -18,3 +18,4 @@ MonoBehaviour:
   knowledgeResourceSo: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
   effects:
   - {fileID: 11400000, guid: 2c1efe4cce0bed643bc532882140baad, type: 2}
+  effectDescription: Expands max population cap to 9.

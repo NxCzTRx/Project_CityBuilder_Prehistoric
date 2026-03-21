@@ -24,7 +24,7 @@ namespace _Scripts.AI.Entities.Pawn
         {
             _gridManager = objectResolver.Resolve<GridManager>();
             
-            var model = new PawnModel(objectResolver.Resolve<GridManager>(), transform.position, food);
+            var model = new PawnModel(objectResolver, transform.position, food);
             var view = GetComponent<PawnView>();
 
             PawnController = new PawnController(model, view, this, mySpawner, objectResolver);

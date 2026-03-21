@@ -18,3 +18,4 @@ MonoBehaviour:
   knowledgeResourceSo: {fileID: 11400000, guid: 83171336b2a51684cb8a7d0af37e2486, type: 2}
   effects:
   - {fileID: 11400000, guid: 6fe06788a0720064488fe0f281fef878, type: 2}
+  effectDescription: Unlocks crop field building.

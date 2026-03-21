@@ -7,21 +7,30 @@ namespace _Scripts.UI.Gameplay
 {
     public class HousingUI : MonoBehaviour
     {
-        [SerializeField] private TMP_Text houseAvailabityTMP;
+        [SerializeField] private TMP_Text houseAvailabilityTMP;
 
+        private bool _initialized;
+
+        public void Init()
+        {
+            _initialized = true;
+            EventBus<OnHousingUpdated>.Subscribe(UpdateAvailability);
+        }
+    
         private void OnEnable()
         {
-            EventBus<OnHousingUpdated>.Subscribe(UpdateAvailabity);
+            if (!_initialized) return;
+            EventBus<OnHousingUpdated>.Subscribe(UpdateAvailability);
         }
 
-        private void UpdateAvailabity(OnHousingUpdated ev)
+        private void UpdateAvailability(OnHousingUpdated ev)
         {
-            houseAvailabityTMP.text = $"{ev.OccupiedSpace} / {ev.MaxSpace}";
+            houseAvailabilityTMP.text = $"{ev.OccupiedSpace} / {ev.MaxSpace}";
         }
-        
+    
         private void OnDisable()
         {
-            EventBus<OnHousingUpdated>.Unsubscribe(UpdateAvailabity);
+            EventBus<OnHousingUpdated>.Unsubscribe(UpdateAvailability);
         }
     }
 }

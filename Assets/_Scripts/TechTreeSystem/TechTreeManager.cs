@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Core;
 using _Scripts.Events;
+using _Scripts.NotificationSystem;
 using _Scripts.ResourcesSystem;
 using _Scripts.ResourcesSystem.Resources;
 using _Scripts.TechTreeSystem.TechEra;
@@ -17,6 +18,7 @@ namespace _Scripts.TechTreeSystem
         private int _currentEraIndex;
 
         private GameResourcesManager _gameResourcesManager;
+        private NotificationManager _notificationManager;
 
         public TechTreeManager(TechEraSo[] eras)
         {
@@ -28,6 +30,7 @@ namespace _Scripts.TechTreeSystem
             _resolver = objectResolver;
             
             _gameResourcesManager = _resolver.Resolve<GameResourcesManager>();
+            _notificationManager = _resolver.Resolve<NotificationManager>();
         }
 
         public bool IsUnlocked(TechNodeSO techNode) => 
@@ -49,6 +52,8 @@ namespace _Scripts.TechTreeSystem
 
             _unlocked.Add(techNode);
             _gameResourcesManager.RemoveResources(new ResourceStock(techNode.KnowledgeResourceSo, techNode.TechCost));
+            _notificationManager.Notify(
+                $"{techNode.NodeName} unlocked: {techNode.EffectDescription}", 7f);
 
             foreach (var effect in techNode.Effects)
                 effect.Apply(_resolver);
